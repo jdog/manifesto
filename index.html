@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<style>
+code { display:block; padding:40px; background-color:rgba(50,50,50,.1); border:1px dotted rgba(0,0,0,.1);  }
+pre { white-space:pre-wrap; }
+</style>
+<meta charset="UTF-8"><title></title></head><body><pre style="padding:50px; max-width:750px; margin:auto; border:2px dotted rgba(0,0,0,.1);">
+
+
+<h1>var dog = { hello : "wolrd" }</h1>
+
+
+<h2>the way of dog </h2>
+<h3><i>it was not always so</i></h3>
+
+
+<hr>
+
+
+FIRST LESSON
+
+
+1) Familiarize yourself with google chrome.
+
+2) Open the javascript console. [ option CMD j ] on mac
+
+3) type this in. var dog = { hello : "world" }
+
+<code>
+
+var dog = { hello : "world" }
+<i>undefined</i>
+
+</code>
+
+
+4) now type dog.
+
+<code>
+dog
+<i>Object {hello: "world"}</i>
+
+</code>
+
+
+5) now type: var world = { "a magical kingdom" : "is yours" }
+6) then type: var dog = { hello : world }
+7) finally type: dog
+
+<code>
+
+var world = { "a magical kingdom" : "is yours" }
+undefined
+var dog = { hello : world }
+undefined
+dog
+Object {hello: Object}
+	hello: Object
+		a magical kingdom: "is yours"
+			__proto__: Object
+	__proto__: Object
+
+</code>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</pre></body></html>
