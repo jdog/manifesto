@@ -1,0 +1,16 @@
+<script>
+
+	// boolean value
+	PAGE.add("Properties.IsTrackingOn", @IsTrackingOn.ToString().ToLower())
+
+	// object with a bunch of string values
+	PAGE.add("Properties.AnnualSubscription", {
+		PlanId: "@annualSub.PlanId.ToString()"
+		, Price: "@annualSub.Price.ToString()"
+		, Description: "@annualSub.Description.ToString()" 
+	})
+
+	// backend object converted directly to JSON object
+	PAGE.add("Properties.User", @Html.Raw(Json.Encode(ViewBag.CurrentMember)))
+
+</script>
