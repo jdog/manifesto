@@ -30,7 +30,7 @@ PAGE.addWait(
 		function init() {
 
 			J.ajax.get(
-				"/jdogAPI.json"
+				"jdogAPI.json"
 				, {}
 				, function(raw) {
 					var data = dog.data = JSON.parse(raw)
