@@ -18,9 +18,35 @@
 <h1>jDog Manifesto</h1>
 
 <div class="section">
-jDog is a hierarchical namespace architecture for client side javascript. Asynchronous by nature, this lean library and design pattern combines the fastest possible speed with greatest flexibility and modularity of code structure. 
+<h4>The way people write javascript is usually messy and confusing</h4>
+Over time facing badly written code takes it's toll on a developer. Engineers who find themselves writing javascript often cringe because they develop a viseral dislike of the language. Having no yearning to learn better ways of working with it, often developers resort to quick seamingly painless copy paste hacks. If you are one of those engineers, then you are looking at the problem in the wrong way. Like the English language, javascript which is the most widely used computer language runs on more devices than any other. If you are a developer writing code for websites, you need to learn how to write good javascript. 
 
-Running under a single namespace is easier to test, document and explore through the built in browser console than code that is all over the place or cast in anonymous functions. jDog simplifies the process of waiting for and adding scripts to your project, adding a consistent interface and root point to explore. It's as simple as typing in PAGE in the browser console to see what items have loaded and how they have loaded. Complex interactions between libraries are handled in modular fashion, and can themselves form reusable components.
+<h4>Because so many people write ugly javascript, it is difficult to learn better ways</h4>
+Javascript is a beautiful and elegant language to write. It's extremely flexible, adaptive, and modular out of the box. It's quick and easy to debug with any browser. But if you only use javascript to write (bootstrap || jQuery || Angular || Backbone || coffeescript || etc) style code then you are just stratching the surface of the beauty of the language. Vanila javascript is much easier to write then you might think. There is a ton of good and bad information out there, learn how to be selective.
+
+<h4>That being said, as a javascript developer you do need some help in the form of basic libraries and tools.</h4>
+<h5>Asynchronously waiting for js libraries to be available</h5>
+jDog has been such a library for me in my trials and travails on the road of building out websites, some large, some small. It is inspired by and has the power of Require.js to load and use external javascript. But the advantage of jDog is in console based debugging, and not being limited by the AMD format. Otherwise require.js is an excellent tool to use, and if you are already using it, then stick with it. There are still things you can pick up from the 'dog pattern'.
+
+<h5>Editing, and or creating elements in the DOM</h5>
+jQuery is still the king, but if you don't mind giving up ie8 and below, you can use document.querySelector ! It's easier to debug in the console than jQuery.
+
+<h5>Debugging</h5>
+Chrome / Chromium are the best in class. jDog's PAGE variable helps bring out that power to explore the PAGE namespace. Running under a single namespace makes it easier to test, document and explore through the browser than code that is scattered or cast in anonymous functions.
+
+<h5>There are tons of libraries out there for free, use them freely!</h5>
+But try to grab the ones with the least external dependencies. Beware widgets that overwrite the jQuery variable or load a bunch of stuff you already have. Start with minimalism as the ideal. What is the least number of external stuff I need to get the project done. Then add more when there is no other way, or you don't have the time to create a custom solution. Over time you will have more understanding of your own code, and will be able to debug and fix problems easier.
+
+<h4>Use Constructors!</h4>
+Module loading scripts can build Modules and Constructors when you know how to do it. But often developers neglect Constructors as they are a bit more complex. By Modules I mean instantiated objects that exist in memory in the web browser. Constructors, at least in javascript are functions that generate Modules or properties of Modules. And it's high time they were given their fair shake. Constructors are far easier to test than Modules, because Modules are really objects, and objects are passed by reference in javascript. Functions such as Constructors functions instantiate new objects, and because of that, that can deployed and destroyed quickly to test all of the properties you come to expect. jDog makes it super easy to build when you follow the dog pattern.
+
+<h4>Use Functions!</h4>
+Functions are also amazing bits of code, and they should be treated with the same respect as Modules and Constructors.
+
+<h4>Global Properties</h4>
+Some values need to be declared at the page level where all parts of the page should have access to them.
+
+
 </div>
 
 <h3 class="mb0">Module example</h3>

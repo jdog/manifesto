@@ -1,14 +1,19 @@
 PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 
+	// tried applying Rainbow to code examples but kept getting null ref error for Replacement.replace
+	// decided to go my own way, though it was a very promissing library
+
 	var dog = {
 		e_parent : e_parent
 		, e_methods : document.createElement("div")
 		, data : data
 		, options : options
 	}
+	, ref = dog.ref = { }
 
 	function buildExample(example) {
-		return "<div class='Example'>" + example + "</div>"
+		var source = ref.ColorizeCode(example).Source
+		return "<div class='Example'>" + source + "</div>"
 	}
 
 	function buildExamples(examples) {
@@ -87,7 +92,10 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		dog.e_parent.appendChild(dog.e_methods)
 	}
 
-	build()
+	PAGE.wait(
+		"Constructors.ColorizeCode"
+		, ref
+		, build)
 
 	return dog
 

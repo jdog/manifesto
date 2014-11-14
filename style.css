@@ -3,8 +3,8 @@ h1 { font-size:220%; }
 h2 { font-size:180%; }
 h3 { font-size:150%; }
 .wrapper { margin:0px auto; max-width:780px; }
-pre { white-space: pre-wrap; font-family: monospace; color: #fff; background-color: #383838; padding:10px; }
-body { font-family: arial; color: #000000; padding:10px; background: rgb(255, 255, 245);}
+pre { white-space: pre-wrap; font-family: monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
+body { font-family: verdana; color: #000000; padding:10px; background: rgb(255, 255, 245); font-size: 13px; line-height: 22px;}
 body {
 	background:transparent url(ricepaper_v3.png);
 }
@@ -26,7 +26,9 @@ i.c, .Constant { color: #39B24A; }
 
 .mb0 { margin-bottom:0; }
 
-h4 { border-bottom:1px dotted #000; padding-bottom:.4em; margin-bottom:.4em; }
+h4 { /* border-bottom:1px dotted #000; */ /* padding-bottom:.4em; */ margin-bottom:.4em; margin-left: -20px;}
+h5 { margin: 0; color: rgb(61, 77, 163); font-size: 11px;}
+h4 + h5 { margin-top:0; }
 
 .expand { color:blue; cursor:pointer; }
 .expanse { overflow:hidden; max-height:0px; opacity:0; transition:all 1s; margin-top:0px; }
@@ -44,7 +46,7 @@ pre .hide { display:none; }
 pre cite { font-style:normal; opacity:.4; font-size:85%; }
 
 
-div.section { margin:20px 0; white-space:pre-wrap; }
+div.section { margin:20px 0; white-space:pre-wrap; padding: 0 20px;}
 
 dl { white-space:initial; }
 dl dt { font-weight:bold; margin:0; padding:0; }
@@ -67,6 +69,39 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Definitions { }
 #API .Examples { }
 #API .Examples .Example { white-space:pre; font-family:monospace; padding: 10px; border:1px dotted rgba(0,0,0,.1); margin:0 0 5px; background-color: rgba(208, 240, 240, 0.33);}
+
+.Examples .keyword  {  color: #000000;  font-weight: bold;}
+.Examples .support  {  color: #000000; font-weight:bold; }
+.Examples .operator { color: #5F5FCF; }
+.Examples .string { color: #60ff60; }
+.Examples .dot { color: #000; }
+.Examples .constant { color: #5968B3; font-weight: bold;}
+.Examples .character { color: #000; }
+.Examples .comment { color: rgba(0, 0, 0, 0.46); }
+.Examples .numeric { color: #000; font-weight:bold; }
+.Examples .function { color: #000; font-weight:bold; }
+.Examples .function.call { color: #000; font-weight:bold; }
+.Examples .entity { color: #000; font-weight:bold; }
+.Examples .jDog { color: #000; font-weight:bold; }
+.Examples .inQuotes { color: rgba(106, 112, 47, 0.86); font-weight:normal; font-style:italic; }
+.Examples .Dog { color: rgb(21, 117, 206); font-weight:bold; }
+
+
+#Editor { }
+#Editor .Editor,
+#Editor .Output { box-sizing:border-box; width:100%; min-height:300px; padding:9px; font-size:12px; }
+
+#Editor .Output { min-height:200px; }
+#Editor .Actions { padding-bottom:5px; }
+#Editor .Actions button { }
+
+
+
+
+
+
+
+
 
 
 

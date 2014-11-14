@@ -11,13 +11,14 @@
 			, "Tags" : [ "spawn", "test", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
-				"PAGE.add('Constructors.Login', function( $root, options ){  ... })"
+				"PAGE.add('Constructors.Login', function( $root, options ){  \n   var exports = {} \n   return exports \n })"
 				, "PAGE.add('Lib.Select2', Select2)"
 				, "PAGE.add('Modules.home', (function(){  ...  }()))"
 				, "PAGE.add('Properties.UserId', 12345)"
 				, "PAGE.add('BaseClass', BaseClass(1234))"
 				, "PAGE.add('BaseClass.ticker', new Ticker('tickerDiv'))"
 				, "var ticker = PAGE.add('BaseClass.ticker', new Ticker('tickerDiv')) // example returning"
+				, "PAGE.add(\"Constructors.Login\", function($form, options) {\n\n options.showError = options.showError || false\n\n var dog = {\n  $form : $form\n  , $html : undefined // see below\n  , options : options\n }\n , ref = dog.ref = { }\n\n // employs the PAGE events extension \n PAGE.ext.events(dog, {\n  Success : []\n  , Fail : []\n })\n\n function build() {\n  var html = ''\n\n  html += \"&#x3c;div class='pad'&#x3e;\"\n  html += \"&#x3c;div class='row'&#x3e;\"\n  html += \"&#x3c;input type='text' name='UserName' /&#x3e;\"\n  html += \"&#x3c;/div&#x3e;\"\n  html += \"&#x3c;div class='row'&#x3e;\"\n  html += \"&#x3c;input type='text' name='Password' /&#x3e;\"\n  html += \"&#x3c;/div&#x3e;\"\n  html += \"&#x3c;div class='row'&#x3e;\"\n  html += \"&#x3c;button&#x3e;Submit&#x3c;/button&#x3e;\"\n  html += \"&#x3c;/div&#x3e;\"\n  html += \"&#x3c;/div&#x3e;\"\n\n  dog.$form.empty()\n  dog.$html = $(html).appendTo(dog.$form)\n }\n\n function events() {\n\n  ref.Validation(dog.$form, function success(data) {\n   dog.triggerEvent(\"Success\", data.id, data.name)\n  }, function fail(msg, err) {\n   dog.triggerEvent(\"Fail\", msg, err)\n  })\n\n }\n \n function init() {\n  build()\n  events()\n }\n\n PAGE.wait(\n  \"Modules.dataService.read\"\n  , \"Constructors.Validation\"\n  , ref\n  , init)\n\n return dog\n\n})\n"
 			]
 			, "Description" : "This is the foundation of adding new items into the global name space."
 			, "Definitions" : {
@@ -38,7 +39,7 @@
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
 				"PAGE.wait('Modules.dataService.read', function(read){ ... }))"
-				, "PAGE.wait('Modules.dataService.read', 'Constructors.LocalStorage', ref, function(){ ... }))"
+				, "PAGE.wait(\n 'Modules.dataService.read',\n 'Constructors.LocalStorage',\n ref,\n function(){ ... }))"
 				, " PAGE.wait( \n  'Modules.dataService' \n  , 'window.dropDown' \n  , 'Constructors.Login' \n  , ref \n  , init)"
 			]
 			, "Description" : "This is the foundation of waiting until library items are ready."
@@ -58,7 +59,7 @@
 			, "Tags" : [ "wait", "module pattern", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
-				"PAGE.addWait('Modules.jdogAPI', ['ajax', 'ready', 'Constructors.APIMethod'], function(ref){ ... }))"
+				" PAGE.addWait( \n  'Modules.homePage' // path \n  , ['ajax', 'ready', 'Constructors.APIMethods'] // required libraries \n  , function(ref) { \n \n   var exports = { \n   } \n \n   return exports \n \n  })" 
 			]
 			, "Description" : "Combines the functionality of add and wait into one function. This is a useful function for creating modules."
 			, "Definitions" : {
@@ -77,7 +78,8 @@
 			, "Tags" : [ "wait", "module pattern", "jQuery", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
-				"PAGE.addWait$('Modules.jdogAPI', ['ajax', 'ready', 'Constructors.APIMethod'], function(ref){ ... }))"
+				"PAGE.addWait$(\n 'Modules.jdogAPI'\n , [\n  'ajax'\n  , 'ready'\n  , 'Constructors.APIMethod'\n ],\n function(ref){ ... }))"
+				, "PAGE.addWait$(\n \"Modules.home\"\n , [\n  \"Constructors.Validation\"\n  , \"Modules.tracking\"\n ]\n , function(ref) {\n\n  var dog = {\n   $loginForm : $(\"#LoginForm\")\n   , $submit : $(\"#LoginForm button.Submit\")\n  }\n\n  function events() {\n\n   dog.validation = ref.Validation(\n    $(\"#LoginForm\")\n    , function success(data) {\n     ref.tracking.track(\n      \"Submit Success\"\n      , data\n      , function() { window.location = \"/dashboard\" })\n    }\n    , function fail() {\n     ref.tracking.track(\"Submit Failed\") \n    })\n\n   dog.$loginForm.submit(function() {\n    ref.tracking.track(\"Submit\") \n   })\n\n  }\n\n  events()\n\n  return dog\n\n })\n"
 			]
 			, "Description" : "Combines the functionality of add and wait, with jQuery's document.wait into one function. This is a useful function for creating modules with jQuery support."
 			, "Definitions" : {
@@ -98,6 +100,7 @@
 			, "Examples" : [
 				"PAGE.extend(function(puppy, dog, log) {})"
 				, "PAGE.extend(function(inst, proto, log) {})"
+				, "PAGE.extend(function(inst, proto, log) {\n\n PAGE.spawn(\"ext.events\", function(dog, eventMap) {\n\n  eventMap = eventMap || { }\n\n  dog.events = eventMap\n\n  dog._uniqueEventMap = { }\n\n  // name of event, function to be called on triggerEvent(name)\n  // events are unique, checking both the string of the function, and the callee.caller string as a key\n  dog.addEvent = function(name, func) {\n   var index\n   , key = func.toString() + arguments.callee.caller.toString()\n\n   // if the event type does not exist yet, create it\n   if (!dog.events[name]) dog.events[name] = []\n\n   if (!dog._uniqueEventMap[name]) dog._uniqueEventMap[name] = {}\n\n   // get the index from the array if there, otherwise undefined\n   index = dog._uniqueEventMap[name][key]\n\n   if (index !== undefined) {\n    // adds the function to the array, replacing the older one\n    dog.events[name].splice(index, 1, func)\n    return dog\n   } else {\n    index = dog.events[name].push(func)\n   }\n\n   // now add the index to the key\n   dog._uniqueEventMap[name][key] = (index-1)\n   return dog\n  }\n\n  dog.emptyEvent = function(name) {\n   if (!dog.events[name]) return\n   dog.events[name].length = 0\n  }\n\n  // triggers the functions within the named event array\n  dog.triggerEvent = function(name, args) {\n\n   if (!dog.events[name]) return\n   var events = dog.events[name]\n\n   // args = args || []\n   args = Array.prototype.slice.call(arguments)\n   args.splice(0,1)\n\n   if (events.length) {\n    for (var x in events) (typeof events[x] === \"function\" && events[x].apply(this, args ))\n   }\n   return dog\n  }\n\n\n}, proto)\n\n})\n"
 			]
 			, "Description" : "This is a function to extend the jDog library. Within the callback are three objects which allow you to overwrite or extend the functionality of jDog itself. Many extensions have already been created, and we hope many more will be made in the future."
 			, "Definitions" : {
@@ -267,7 +270,6 @@
 			, "Source" : [ "page.base.js" ]
 			, "Examples" : [
 				"PAGE.loadScript('/Content/css/buttons.js')"
-				, "PAGE.loadScript('/Content/css/buttons.js', true)"
 				, "PAGE.loadScript('/Content/css/buttons.js', true)"
 				, " PAGE.loadScript( \n  '/Scripts/page.constructors.dataService.js' \n  , '/Scripts/page.constructors.dataService.read.js' \n  , '/Scripts/page.constructors.dataService.write.js' \n  , '/Scripts/page.modules.dataService.write.js' \n  , '/Scripts/page.modules.dataService.read.js' \n  , true)"
 				, " PAGE.loadScript( \n  '~/Scripts/page.constructors.dataService.js' \n  , '~/Scripts/page.constructors.dataService.read.js' \n  , '~/Scripts/page.constructors.dataService.write.js' \n  , '~/Scripts/page.modules.dataService.write.js' \n  , '~/Scripts/page.modules.dataService.read.js' \n  , true)"

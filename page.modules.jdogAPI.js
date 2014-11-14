@@ -1,3 +1,14 @@
+PAGE.loadScript(
+	"page.ajax.js"
+	, "page.extend.batchCallback.js"
+	, "page.Constructors.APIMethod.js"
+	, "page.ColorizeMap.javascript.js"
+	, "page.ColorizeMap.jDog.js"
+	, "page.ColorizeMap.generic.js"
+	, "page.Constructors.ColorizeCode.js"
+	, "page.clone.js"
+	, true)
+
 PAGE.addWait(
 	"Modules.jdogAPI"
 
@@ -24,7 +35,6 @@ PAGE.addWait(
 					ref.APIMethod(dog.e_root, dog.data.Methods[x])
 				)
 			}
-
 		}
 
 		function init() {
