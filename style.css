@@ -38,7 +38,7 @@ h4 + h5 { margin-top:0; }
 .jump a { display:block; text-decoration:none; }
 
 pre {display: block; padding: 40px; border: 1px dotted rgba(0,0,0,.1); font-size:89%; }
-code {display: inline-block; padding: 5px; border: 1px dotted rgba(0,0,0,.1); font-size:89%; }
+code {display: inline-block; padding: 5px; border: 1px dotted rgba(0,0,0,.1); font-size:89%; line-height:120%; }
 pre, code { white-space:pre-wrap; }
 pre > u { text-decoration:none; font-size:150%; vertical-align:middle; }
 pre > em { color:rgba(0,0,0,.3) }
