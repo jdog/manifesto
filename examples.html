@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A truly simple example</title>
+<meta name="colorscheme" content="github">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sidePanel.css">
+</head>
+<body>
+
+	<div id="sidePanel">
+		<span class="icon">≡</span>
+		<div class="guts">
+			<div><a href="index.html">Manifesto</a></div>
+			<div><span>Examples</span></div>
+			<div><a href="api.html">API</a></div>
+			<div><a href="why.html">Why?</a></div>
+		</div>
+	</div>
+
+<div class="wrapper">
+<h1>Examples</h1>
+First you need to load it
+
+<pre id='vimCodeElement'>
+<span class="Comment">&lt;!DOCTYPE html&gt;</span>
+<span class="Identifier">&lt;</span><span class="Statement">html</span><span class="Identifier"> </span><span class="Type">lang</span><span class="Identifier">=</span><span class="String">&quot;en&quot;</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;</span><span class="Statement">head</span><span class="Identifier">&gt;</span>
+<span class="PreProc">  </span><span class="Identifier">&lt;</span><span class="Statement">meta</span><span class="Identifier"> </span><span class="Type">charset</span><span class="Identifier">=</span><span class="String">&quot;UTF-8&quot;</span><span class="Identifier">&gt;</span>
+<span class="PreProc">  </span><span class="Identifier">&lt;</span><span class="Statement">script</span><span class="Identifier"> </span><span class="Type">src</span><span class="Identifier">=</span><span class="String">&quot;/PathToScripts/page.loader.js&quot;</span><span class="Identifier">&gt;</span><span class="Identifier">&lt;/</span><span class="Statement">script</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Statement">head</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;</span><span class="Statement">body</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Statement">body</span><span class="Identifier">&gt;</span>
+
+  <span class="Comment">&lt;!</span><span class="Comment">-- all of your other scripts load here --</span><span class="Comment">&gt;</span>
+
+<span class="Identifier">&lt;/</span><span class="Statement">html</span><span class="Identifier">&gt;</span>
+</pre>
+
+
+
+<h3 class="mb0">Module example</h3>
+Example of creating a Module, ie, immediately instantiated object
+
+<pre id='vimCodeElement'>
+<span class="Comment">//scripts/loginPage/page.modules.loginPage.js</span>
+
+PAGE.waitAdd$(
+  <span class="Constant">&quot;Modules.loginPage&quot;</span>,
+  [
+    <span class="Constant">&quot;Constructors.Loader&quot;</span>
+    , <span class="Constant">&quot;Constructors.Login&quot;</span>
+    , <span class="Constant">&quot;Modules.tracking&quot;</span>
+  ]
+  , <span class="Identifier">function</span>(ref) {
+
+    <span class="Type">var</span> $form = $(<span class="Constant">&quot;#form1&quot;</span>)
+
+    <span class="Type">var</span> dog = {
+      $form : $form
+      , <span class="Statement">login</span> : ref.Login( $form, { <span class="Statement">showError</span> : <span class="Constant">true</span> } )
+      , <span class="Statement">loader</span> : ref.Loader().show()
+    }
+
+    dog.$form.submit(<span class="Identifier">function</span>() {
+      ref.tracking.commonTrack(<span class="Constant">&quot;clicked submit&quot;</span>)
+    })
+
+    dog.login.addEvent(<span class="Constant">&quot;Success&quot;</span>, <span class="Identifier">function</span>(id, name) {
+      ref.tracking.commonTrack(<span class="Constant">&quot;logged in&quot;</span>, { <span class="Statement">id</span> : id, <span class="Statement">name</span> : name })
+    })
+
+    dog.login.addEvent(<span class="Constant">&quot;Fail&quot;</span>, <span class="Identifier">function</span>(msg, err) {
+      ref.tracking.commonTrack(<span class="Constant">&quot;failed login&quot;</span>, { <span class="Statement">msg</span> : msg, <span class="Statement">err</span> : err })
+    })
+
+    <span class="Statement">return</span> dog
+
+})
+</pre>
+
+<h3 class="mb0">Constructor Example</h3>
+Example of creating a Constructor, ie, code that gets instantiated by modules
+
+<pre id='vimCodeElement'>
+<span class="Comment">//scripts/page.Constructors.login.js</span>
+
+PAGE.add(<span class="Constant">&quot;Constructors.Login&quot;</span>, <span class="Identifier">function</span>($form, options) {
+
+  options.showError = options.showError || <span class="Constant">false</span>
+
+  <span class="Type">var</span> dog = {
+    $form : $form
+    , $html : <span class="Type">undefined</span> <span class="Comment">// see below</span>
+    , <span class="Statement">options</span> : options
+  }
+  , ref = dog.ref = { }
+
+<span class="Comment">  // employs the PAGE events extension </span>
+  PAGE.ext.events(dog, {
+    <span class="Statement">Success</span> : []
+    , <span class="Statement">Fail</span> : []
+  })
+
+  <span class="Identifier">function</span> build() {
+    <span class="Type">var</span> html = <span class="Constant">''</span>
+
+    html += <span class="Constant">&quot;&lt;div class='pad'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;input type='text' name='UserName' /&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;input type='text' name='Password' /&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;button&gt;Submit&lt;/button&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+
+    dog.$form.empty()
+    dog.$html = $(html).appendTo(dog.$form)
+  }
+
+  <span class="Identifier">function</span> events() {
+
+    ref.Validation(dog.$form, <span class="Identifier">function</span> success(data) {
+      dog.triggerEvent(<span class="Constant">&quot;Success&quot;</span>, data.id, data.name)
+    }, <span class="Identifier">function</span> fail(msg, err) {
+      dog.triggerEvent(<span class="Constant">&quot;Fail&quot;</span>, msg, err)
+    })
+
+  }
+
+  <span class="Identifier">function</span> init() {
+    build()
+    events()
+  }
+
+  PAGE.wait(
+    <span class="Constant">&quot;Modules.dataService.read&quot;</span>
+    , <span class="Constant">&quot;Constructors.Validation&quot;</span>
+    , ref
+    , init)
+
+  <span class="Statement">return</span> dog
+
+})
+</pre>
+
+<h3 class="mb0">Properties example</h3>
+Example of passing values from the server side code to javascript code
+<pre id='vimCodeElement'>
+<span class="Identifier">&lt;</span><span class="Statement">script</span><span class="Identifier">&gt;</span>
+
+<span class="Comment">  // boolean value</span>
+<span class="Special">  PAGE.add</span>(<span class="Constant">&quot;Properties.IsTrackingOn&quot;</span><span class="Special">, @IsTrackingOn.ToString</span>(<span class="Special">).ToLower</span>(<span class="Special">))</span>
+
+<span class="Comment">  // object with a bunch of string values</span>
+<span class="Special">  PAGE.add</span>(<span class="Constant">&quot;Properties.AnnualSubscription&quot;</span><span class="Special">, </span>{
+<span class="Special">    </span><span class="Statement">PlanId</span><span class="Special">: </span><span class="Constant">&quot;@annualSub.PlanId.ToString()&quot;</span>
+<span class="Special">    , </span><span class="Statement">Price</span><span class="Special">: </span><span class="Constant">&quot;@annualSub.Price.ToString()&quot;</span>
+<span class="Special">    , </span><span class="Statement">Description</span><span class="Special">: </span><span class="Constant">&quot;@annualSub.Description.ToString()&quot;</span><span class="Special"> </span>
+<span class="Special">  })</span>
+
+<span class="Comment">  // backend object converted directly to JSON object</span>
+<span class="Special">  PAGE.add</span>(<span class="Constant">&quot;Properties.User&quot;</span><span class="Special">, @Html.Raw</span>(<span class="Special">Json.Encode</span>(<span class="Special">ViewBag.CurrentMember)))</span>
+
+<span class="Identifier">&lt;/</span><span class="Statement">script</span><span class="Identifier">&gt;</span>
+</pre>
+
+<h3 class="mb0">Comment heavy Constructor example</h3>
+<pre id='vimCodeElement'>
+<span class="Comment">// First Parameter is the name with namespace</span>
+<span class="Comment">// in this example, a Constructor that takes two parameters</span>
+<span class="Comment">//</span>
+<span class="Comment">// Constructors are a special kind of function</span>
+<span class="Comment">// that creates an object that has public methods and properties</span>
+<span class="Comment">// this simple example has three public properties</span>
+<span class="Comment">// $form, $html, and options</span>
+<span class="Comment">//</span>
+<span class="Comment">// it also has a public (Module) property, validation</span>
+<span class="Comment">//</span>
+<span class="Comment">// in addition, because it employs the events extension</span>
+<span class="Comment">// the following methods are added as well</span>
+<span class="Comment">//</span>
+<span class="Comment">// addEvent( String, Function )</span>
+<span class="Comment">// triggerEvent ( String, property, property ... )</span>
+<span class="Comment">//</span>
+<span class="Comment">// as well as this events object</span>
+<span class="Comment">// events {</span>
+<span class="Comment">//  Success : Array</span>
+<span class="Comment">//  , Fail : Array</span>
+<span class="Comment">//  , SubmitClick : Array</span>
+<span class="Comment">// }</span>
+
+PAGE.add(<span class="Constant">&quot;Constructors.Login&quot;</span>, <span class="Identifier">function</span>($form, options) {
+
+<span class="Comment">  // define options if not defined</span>
+  options = options || { }
+
+<span class="Comment">  // options are optional, this line of code falls back to false if property is not defined</span>
+  options.showError = options.showError || <span class="Constant">false</span>
+
+<span class="Comment">  // ah, the beloved dog</span>
+<span class="Comment">  // a dog is the equivalent to the exports object</span>
+<span class="Comment">  // the dog is the thing that gets returned from the contructor</span>
+<span class="Comment">  // the dog is defined in this way to create a legend towards</span>
+<span class="Comment">  // the top of the file, to allow for quick reference</span>
+
+  <span class="Type">var</span> dog = {
+    $form : $form
+    , $html : <span class="Type">undefined</span> <span class="Comment">// see below</span>
+    , <span class="Statement">options</span> : options
+    , <span class="Statement">validation</span> : <span class="Type">undefined</span> <span class="Comment">// see below</span>
+  }
+
+<span class="Comment">  // the reference object, AKA ref is an object to house all external libraries</span>
+  , ref = dog.ref = { }
+
+<span class="Comment">  // employs the PAGE events extension </span>
+<span class="Comment">  // this adds publically available events based on these names</span>
+<span class="Comment">  // these events are a series of functions that get fired when the named event is triggered</span>
+  PAGE.ext.events(dog, {
+    <span class="Statement">Success</span> : []
+    , <span class="Statement">Fail</span> : []
+    , <span class="Statement">SubmitClick</span> : []
+  })
+
+<span class="Comment">  // a very common technique is to generate all of the HTML needed in this file</span>
+<span class="Comment">  // having html defined outside of the constructor is also valid, but may lead to greater complexity</span>
+<span class="Comment">  // when it comes to file management</span>
+  <span class="Identifier">function</span> build() {
+<span class="Comment">    // create some html the tried and true way</span>
+    <span class="Type">var</span> html = <span class="Constant">''</span>
+
+    html += <span class="Constant">&quot;&lt;div class='pad'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;input type='text' name='UserName' /&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;input type='text' name='Password' /&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;div class='row'&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;button&gt;Submit&lt;/button&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+    html += <span class="Constant">&quot;&lt;/div&gt;&quot;</span>
+
+<span class="Comment">    // empty out the container to place it just in case</span>
+    dog.$form.empty()
+<span class="Comment">    // and then populate the container with newly formed jQuery code</span>
+    dog.$html = $(html).appendTo(dog.$form)
+  }
+
+<span class="Comment">  // also extremely common practice is to create an events function</span>
+<span class="Comment">  // this is a great place to trigger any named events, add click events through jQuery etc</span>
+<span class="Comment">  // events should be fired after the HTML has been built</span>
+<span class="Comment">  // events should relate directly to the built HTML and not the global HTML on the page</span>
+<span class="Comment">  // this greatly increases the speed of building out the HTML</span>
+  <span class="Identifier">function</span> events() {
+
+<span class="Comment">    // here is an example of calling a library constructor</span>
+<span class="Comment">    // notice that the dog.validation object get built by the Validation Constructor</span>
+<span class="Comment">    // also notice that this validation constructor has two function callbacks, success and fail</span>
+    dog.validation = ref.Validation(dog.$form, <span class="Identifier">function</span> success(data) {
+
+<span class="Comment">      // this triggers the Success event upon the success callback firing</span>
+<span class="Comment">      // notice that it is passing in data from the data object</span>
+      dog.triggerEvent(<span class="Constant">&quot;Success&quot;</span>, data.id, data.name)
+
+    }, <span class="Identifier">function</span> fail(msg, err) {
+
+<span class="Comment">      // this triggers the Fail event upon the fail callback firing</span>
+<span class="Comment">      // notice that it is passing in msg, and err</span>
+      dog.triggerEvent(<span class="Constant">&quot;Fail&quot;</span>, msg, err)
+    })
+
+<span class="Comment">    // the following code starts the validation code to run</span>
+<span class="Comment">    // this specific code keeps checking until the code is valid showing errors as you type</span>
+    dog.$form.click(<span class="Identifier">function</span>() {
+
+<span class="Comment">      // this triggers the SubmitClick event</span>
+<span class="Comment">      // notice that it is passing in dog.$form</span>
+      dog.triggerEvent(<span class="Constant">&quot;SubmitClick&quot;</span>, dog.$form)
+
+<span class="Comment">      // line that starts the validation, a public method of the validation Module embedded in this constructor</span>
+      dog.validation.startValidation()
+    })
+
+  }
+
+<span class="Comment">  // init is the code that starts everything running</span>
+<span class="Comment">  // in this example, init only fires after all external libraries are loaded</span>
+  <span class="Identifier">function</span> init() {
+    build()
+    events()
+  }
+
+  PAGE.wait(
+    <span class="Constant">&quot;Modules.dataService.read&quot;</span> <span class="Comment">// example not shown here</span>
+    , <span class="Constant">&quot;Constructors.Validation&quot;</span> <span class="Comment">// see above for usage</span>
+    , ref <span class="Comment">// passing in the reference object here</span>
+    , init) <span class="Comment">// finally firing this function when it's done loading</span>
+
+<span class="Comment">  // finally return the dog</span>
+<span class="Comment">  // consider dog like the exports object, or the this object</span>
+  <span class="Statement">return</span> dog
+
+})
+</pre>
+
+<h3 class="mb0">Augmented Module pattern</h3>
+<pre id='vimCodeElement'>
+<span class="Comment">// Module augmentation pattern</span>
+
+PAGE.wait(
+  <span class="Constant">&quot;Modules.basePage&quot;</span>
+  , <span class="Constant">&quot;Properties.User&quot;</span>
+  , <span class="Constant">&quot;Modules.dataService.write&quot;</span>
+  , {}
+  , <span class="Identifier">function</span>(ref) {
+
+<span class="Comment">    // extends the functionality of basePage</span>
+
+    ref.basePage.User = ref.User
+
+    ref.basePage.finish(<span class="Identifier">function</span>() {
+      ref.write.saveState(<span class="Constant">123</span>, <span class="Constant">&quot;abc&quot;</span>)
+    })
+
+  })
+
+</pre>
+
+<h3 class="mb0">Waiting for external libraries</h3>
+<pre id='vimCodeElement'>
+<span class="Comment">// waiting for external javascript</span>
+
+PAGE.wait(
+  <span class="Constant">&quot;window.jQuery.fn.select2&quot;</span>
+  , <span class="Constant">&quot;Modules.dataService.read&quot;</span>
+  , {}
+  , <span class="Identifier">function</span>(ref) {
+
+    ref.read.getStates(<span class="Identifier">function</span>(states) {
+      $(<span class="Constant">&quot;#select2&quot;</span>).select2()
+    })
+
+  })
+
+</pre>
+
+
+
+</div>
+</body>
+</html>

@@ -22,11 +22,12 @@ i.c, .Constant { color: #39B24A; }
 .jump { 
 	white-space:inherit;
 	-webkit-columns:100px 2;
+	padding: 0 11px;
 }
 
 .mb0 { margin-bottom:0; }
 
-h4 { /* border-bottom:1px dotted #000; */ /* padding-bottom:.4em; */ margin-bottom:.4em; margin-left: -20px;}
+h4 { /* border-bottom:1px dotted #000; */ /* padding-bottom:.4em; */ margin-bottom:.4em; /* margin-left: -20px; */}
 h5 { margin: 0; color: rgb(61, 77, 163); font-size: 11px;}
 h4 + h5 { margin-top:0; }
 
@@ -46,7 +47,7 @@ pre .hide { display:none; }
 pre cite { font-style:normal; opacity:.4; font-size:85%; }
 
 
-div.section { margin:20px 0; white-space:pre-wrap; padding: 0 20px;}
+div.section { /* margin:20px 0; */ white-space:pre-wrap; padding: 0 20px; background-color: rgba(255,255,255,0.6);}
 
 dl { white-space:initial; }
 dl dt { font-weight:bold; margin:0; padding:0; }
@@ -94,6 +95,9 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #Editor .Output { min-height:200px; }
 #Editor .Actions { padding-bottom:5px; }
 #Editor .Actions button { }
+
+
+
 
 
 
