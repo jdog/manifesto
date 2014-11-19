@@ -5,19 +5,21 @@
 	min-width:0; 
 	max-width:0; 
 	background-color: rgba(0, 0, 0, 0.56); 
-	width: 151px; 
-	padding: 10px; 
+	width: 169px; 
+	padding: 23px; 
 	box-sizing: border-box; 
 	position: absolute; 
 	transition:all .4s;  
-	padding-top: 20px;
+	padding-top: 68px;
 	right:0;
 	bottom: 0;
 	top: 0;
 }
-#sidePanel .guts div { }
+#sidePanel .guts div {
+    margin: 14px 0;
+ }
 #sidePanel .guts div a {
-	font-size: 14px;
+	font-size: 19px;
 	display: inline-block;
 	padding: 6px;
 	text-decoration: none;
@@ -25,7 +27,7 @@
 }
 
 #sidePanel .guts div span {
-	font-size: 14px;
+	font-size: 19px;
 	display: inline-block;
 	padding: 6px;
 	text-decoration: none;
@@ -33,11 +35,12 @@
 }
 
 #sidePanel.Open .icon { }
-#sidePanel.Open .guts { visibility:visible; max-width:300px; }
+#sidePanel.Open .guts { visibility:visible; max-width: 300px; }
 
 html, body { padding:0; margin:0; }
 
 .wrapper {  }
+
 
 
 
