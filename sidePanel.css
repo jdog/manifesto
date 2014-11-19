@@ -32,9 +32,8 @@
 	color: white;
 }
 
-#sidePanel .icon:hover { }
-#sidePanel .icon:hover + .guts { visibility:visible; max-width: 300px; }
-#sidePanel .guts:hover { visibility:visible; max-width:300px; }
+#sidePanel.Open .icon { }
+#sidePanel.Open .guts { visibility:visible; max-width:300px; }
 
 html, body { padding:0; margin:0; }
 
