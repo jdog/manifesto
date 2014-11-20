@@ -64,6 +64,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Title .Tags { font-size:14px; font-weight:normal; float:right; line-height:30px; }
 #API .Guts { padding:0 20px 20px; }
 #API .Source { float:right; }
+#API .Title .link { float: right; margin-left: 10px; color: rgba(0, 102, 255, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; }
 #API .Returns { }
 #API .Label { font-weight:bold; margin:1em 0 .4em; color: rgb(41, 124, 124); }
 #API .Description { }
@@ -95,19 +96,5 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #Editor .Output { min-height:200px; }
 #Editor .Actions { padding-bottom:5px; }
 #Editor .Actions button { }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

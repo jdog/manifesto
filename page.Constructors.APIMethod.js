@@ -55,6 +55,7 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 			, data = dog.data 
 
 		html += "<div class='Title'>"
+		html += "<a href='#" + data.Name + "' class='link'>§</a>"
 		html += "<span class='Tags'>"
 		html += data.Tags ? data.Tags.length ? data.Tags.join(", ") : "" : ""
 		html += "</span>"
@@ -89,6 +90,7 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		html += "</div>"
 
 		dog.e_methods.innerHTML = html
+		dog.e_methods.id = data.Name
 		dog.e_parent.appendChild(dog.e_methods)
 	}
 
