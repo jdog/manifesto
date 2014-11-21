@@ -70,7 +70,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Description { }
 #API .Definitions { }
 #API .Examples { }
-#API .Examples .Example { white-space:pre; font-family:monospace; padding: 10px; border:1px dotted rgba(0,0,0,.1); margin:0 0 5px; background-color: rgba(208, 240, 240, 0.33);}
+#API .Examples .Example { white-space:pre; font-family:monospace; padding: 15px 20px; border:1px dotted rgba(0,0,0,.1); margin: 0 -20px 5px; background-color: rgba(231, 247, 247, 0.55);}
 
 .Examples .keyword  {  color: #000000;  font-weight: bold;}
 .Examples .support  {  color: #000000; font-weight:bold; }
@@ -104,5 +104,8 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	}
 
 }
+
+
+
 
 
