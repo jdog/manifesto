@@ -9,10 +9,20 @@
 <meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
 <meta name="colorscheme" content="github">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sidePanel.css">
 </head>
 <body>
+	<div id="sidePanel">
+		<span class="icon">≡</span>
+		<div class="guts">
+			<div><a href="index.html">Manifesto</a></div>
+			<div><a href="examples.html">Examples</a></div>
+			<div><a href="api.html">API</a></div>
+			<div><a href="why.html">Why?</a></div>
+			<div><a href="editor.html">Editor</a></div>
+		</div>
+	</div>
 	<div class="wrapper">
-		<a style="font-size:24px; float:right;" href="api.html">Complete API</a>
 		<h1>JavaScript Example Editor</h1>
 		<p>
 			Converts an HTML example into JSON friendly string
@@ -23,4 +33,5 @@
 <script src="page.loader.js"></script>
 <script src="page.base.js"></script>
 <script src="page.modules.editor.js"></script>
+<script src="page.Modules.navigation.js"></script>
 </html>

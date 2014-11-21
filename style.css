@@ -97,12 +97,11 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #Editor .Actions { padding-bottom:5px; }
 #Editor .Actions button { }
 
-@media (min-width:0px) and (max-width:870px) {
-
-	#sidePanel.Open + .wrapper {
-		padding-right:169px;
-	}
-
+@media (min-width:0px) and (max-width:900px) {
+	#sidePanel.Open + .wrapper { padding-right:169px; }
+}
+@media (min-width:901px) and (max-width:1100px) {
+	#sidePanel.Open + .wrapper { padding-right:70px; }
 }
 
 
