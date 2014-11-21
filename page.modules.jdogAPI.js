@@ -35,6 +35,15 @@ PAGE.addWait(
 					ref.APIMethod(dog.e_root, dog.data.Methods[x])
 				)
 			}
+
+			if (location.hash) {
+				var methodName = location.hash.substr(1, location.hash.length - 1)
+				var currentLink = dog.e_root.querySelector("a[name='" + methodName + "']")
+				if (currentLink) {
+					currentLink.click()
+				}
+			}
+
 		}
 
 		function init() {
