@@ -6,7 +6,7 @@
 	max-width:0; 
 	background-color: rgba(0, 0, 0, 0.56); 
 	width: 169px; 
-	padding: 23px; 
+	padding: 23px 0; 
 	box-sizing: border-box; 
 	position: absolute; 
 	transition:all .4s;  
@@ -16,26 +16,28 @@
 	top: 0;
 }
 #sidePanel .guts div {
-    margin: 14px 0;
+    margin: 0;
  }
-#sidePanel .guts div a {
+#sidePanel .guts div a,
+#sidePanel .guts div span {
 	font-size: 19px;
-	display: inline-block;
-	padding: 6px;
+	display: block;
+	padding: 16px;
 	text-decoration: none;
-	color: rgb(192, 192, 253);
+	color: white;
+}
+#sidePanel .guts div a:hover {
+	background-color: rgba(61, 228, 228, 0.44);
 }
 
 #sidePanel .guts div span {
-	font-size: 19px;
-	display: inline-block;
-	padding: 6px;
-	text-decoration: none;
-	color: white;
+	background-color: rgba(61, 228, 228, 0.24);
 }
 
 #sidePanel.Open .icon { }
 #sidePanel.Open .guts { visibility:visible; max-width: 300px; }
 
 html, body { padding:0; margin:0; }
+
+
 

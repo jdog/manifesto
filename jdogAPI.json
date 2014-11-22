@@ -12,7 +12,7 @@
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
 				"PAGE.add('Constructors.Login', function( $root, options ){  \n   var exports = {\n     $root : $root\n     , options : options\n   }\n\n  function privateFunction() {\n  }\n\n  exports.publicFunction = function() {\n  }\n\n   return exports \n })"
-				, "// assuming Select2 was defined elsewhere\nPAGE.add('Lib.Select2', Select2)"
+				, "// assuming Select2 was defined in the same file above\nPAGE.add('Lib.Select2', Select2)"
 				, "PAGE.add('Modules.home', (function(){  ...  }()))"
 				, "PAGE.add('Properties.UserId', 12345)"
 				, "PAGE.add('BaseClass', BaseClass(1234))"
@@ -22,7 +22,7 @@
 			]
 			, "Description" : "This is the foundation of adding new items into the global name space. It's mean't to be extremely fast to add. If you have existing code for example, you can always add it after the fact as many of the following examples will demonstrate."
 			, "Definitions" : {
-				"Path" : "Path of the item added, example Constructors.YourConstructor"
+				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
 				, "Thing" : "Any variable or literal"
 			}
 			, "Returns" : "the Thing added gets returned"
@@ -45,7 +45,7 @@
 			]
 			, "Description" : "This is the foundation of waiting until library items are ready. Notice the Ref object. Unlike require js which pushes returns the modules in the arguments of the function, PAGE uses Ref. Ref is an object. In javascript, objects are passed by reference. By passing in an object into the second parameter, that will be the object which receives all of the library items being waited for. The name will be the name of the library item being waited for. For example, if you are waiting for Constructors.Pork, the ref will return { Pork : Object }"
 			, "Definitions" : {
-				"Path" : "Path of the library item required, example Constructors.YourConstructor"
+				"Path" : "Path of the library item required, example 'Constructors.YourConstructor'"
 				, "Ref" : "Reference Object to pass all library items into"
 				, "Callback" : "Function to call when all is loaded"
 			}
@@ -60,11 +60,11 @@
 			, "Tags" : [ "wait", "module pattern", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
-				" PAGE.addWait( \n  'Modules.homePage' // path \n  , ['ajax', 'ready', 'Constructors.APIMethods'] // required libraries \n  , function(ref) { \n \n   var exports = { \n   } \n \n   return exports \n \n  })" 
+				"PAGE.addWait( \n  'Modules.homePage' // path \n  , [                // required libraries\n      'ajax'\n      , 'ready'\n      , 'Constructors.APIMethods'\n  ]\n  , function(ref) {  // callback\n \n   var exports = { \n     apiMethods : undefined // see below\n   }\n\n   exports.loadPage = function() {\n     ref.ajax(\"/pathToSomething\", {}, function(data) {\n       // ... lots of your code here\n       exports.apiMethods = ref.APIMethods(data)\n     })\n   }\n \n   return exports \n \n  })"
 			]
-			, "Description" : "Combines the functionality of add and wait into one function. This is a useful function for creating modules."
+			, "Description" : "Combines the functionality of add and wait into one function. This is a useful function for creating modules. For those familiar with requirejs this has an almost identical format, with the exception that the callback returns a single object instead of a list of arguments. This format is superior in many ways, as it is nolonger necessary to duplicate the names, or keep track of the order of arguments."
 			, "Definitions" : {
-				"Path" : "String - Path of the library item required, example Constructors.YourConstructor"
+				"Path" : "String - Path of the library item required, example 'Constructors.YourConstructor'"
 				, "WaitList" : "Array - list of other libraries required before callback is called"
 				, "Callback" : "Function to call when all is loaded"
 			}
@@ -84,7 +84,7 @@
 			]
 			, "Description" : "Combines the functionality of add and wait, with jQuery's document.wait into one function. This is a useful function for creating modules with jQuery support."
 			, "Definitions" : {
-				"Path" : "String - Path of the library item required, example Constructors.YourConstructor"
+				"Path" : "String - Path of the library item required, example 'Constructors.YourConstructor'"
 				, "WaitList" : "Array - list of other libraries required before callback is called"
 				, "Callback" : "Function to call when all is loaded"
 			}
@@ -125,7 +125,7 @@
 			]
 			, "Description" : "Combines the functionality of 'add' with jQuery ready. This is a very useful feature for jQuery users as it signals it's safe to call the $ (jQuery) variable. However, notice that unlike PAGE.add, add$ returns undefined."
 			, "Definitions" : {
-				"Path" : "Path of the item added, example Constructors.YourConstructor"
+				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
 				, "Thing" : "Any variable or literal"
 			}
 			, "Returns" : "undefined"
@@ -150,7 +150,7 @@
 			]
 			, "Description" : "Checks to see if this path exists inside the global PAGE variable, or, alternatively, a specific object. Can be very powerful for preventing null reference errors."
 			, "Definitions" : {
-				"Path" : "Path of the item added, example Constructors.YourConstructor"
+				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
 				, "Base" : "optional - Object to search in, defaults to PAGE"
 				, "Alternate" : "optional - if it's empty, then return this instead"
 			}
@@ -172,7 +172,7 @@
 			]
 			, "Description" : "Waits for one item to load, then triggers callback. Base is optional"
 			, "Definitions" : {
-				"Path" : "Path of the item, example Constructors.YourConstructor"
+				"Path" : "Path of the item, example 'Constructors.YourConstructor'"
 				, "Base" : "optional - Object to search in, defaults to PAGE"
 				, "Callback" : "Function to call when all is loaded"
 			}
@@ -193,7 +193,7 @@
 			]
 			, "Description" : "This is the inverse of exists, allows you to put just about anything anywhere in your code."
 			, "Definitions" : {
-				"Path" : "Path of the item added, example Constructors.YourConstructor"
+				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
 				, "Thing" : "Any variable or literal"
 				, "Base" : "optional - Object to search in, defaults to PAGE"
 			}
@@ -344,7 +344,7 @@
 			]
 			, "Description" : "This is a specialized utility helpful in testing to remove an item from the PAGE object (or window object). Also can be used to swap out one library for another. It returns the thing being removed, so it could be used to store the removed item somewhere else"
 			, "Definitions" : {
-				"Path" : "Path of the item to be removed, example Constructors.YourConstructor"
+				"Path" : "Path of the item to be removed, example 'Constructors.YourConstructor'"
 				, "Base" : "optional - Object to search in, defaults to PAGE"
 				, "Swap" : "optional - if true then swap the target with this thing, still returns old removed version"
 			}
