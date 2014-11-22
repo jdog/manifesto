@@ -1,6 +1,6 @@
 PAGE.loadScript(
 	"page.extend.events.js"
-	, "page.Constructors.TextAreaSubmitter.js"
+	, "page.constructors.TextAreaSubmitter.js"
 	, "page.Constructors.TextConverter.js"
 )
 
