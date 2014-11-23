@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="Why">
 <head>
 <meta charset="UTF-8">
 <title>A truly simple example</title>
@@ -62,7 +62,7 @@ The <i class="c">PAGE</i> variable started out in the frustration of inheriting 
 
 For small projects this practice is understandable, but as the web evolved to expect ajax style interaction this practice broke down. This is especially true when trying to modify older code writing in this way. If you didn't know what to look for or have easy access to the complete code base, you can spend a lot of time just digging through the code to find what you need. Time wasted.
 
-Viewing source (back in the day) would produce some serious speghetti. It took a long time to understand the scope of adding new features. And often, features would never get removed since doing so could break something somewhere else in unexpected ways. In short it was a mess, and there was no standard way of organizing all of the mess.
+Viewing source (back in the day) would produce some serious spaghetti. It took a long time to understand the scope of adding new features. And often, features would never get removed since doing so could break something somewhere else in unexpected ways. In short it was a mess, and there was no standard way of organizing all of the mess.
 
 For these reasons and many others I made the decision that for any new projects I would store things into a common variable called <i class="c">PAGE</i>. In that way, if I hadn't worked on the project in awhile I could type <i class="c">PAGE</i> in the console to peak at what was happening and get up to speed quickly.
 
@@ -91,7 +91,7 @@ This constant need for retrieving and adding nested properties (PAGE.Something.S
 This required PAGE to be it's own library, loading very early. Though this was itself annoying, it resolved a lot of common problems with asynchronous loading. After a couple rewrites, I eventually came up with this type of syntax:
 
 <h3 class="mb0">Checking if a path exists</h3>
-<pre id='vimCodeElement'>
+<pre class='vimCodeElement'>
 <span class="Comment">// the old way of doing it</span>
 <span class="Comment">// this is checking against the PAGE object</span>
 <span class="Type">var</span> part1 = (PAGE &amp;&amp; PAGE.Something &amp;&amp; PAGE.Something.SomeOtherThing) ?
@@ -120,7 +120,7 @@ This required PAGE to be it's own library, loading very early. Though this was i
 
 <div class="expand">Source code for checking Existence</div>
 <div class="expanse">
-As you can see the essense of exists is pretty simple. First, split out the path by periods. The inner <i class="c">obj</i> variable gets redefined on each pass through the while loop. If it reaches an undefined or null it stops prematurely, otherwise it returns the property requested. Finally, there is an alternative variable which will return optionally if either the thing is undefined or the value is null.
+As you can see the essence of exists is pretty simple. First, split out the path by periods. The inner <i class="c">obj</i> variable gets redefined on each pass through the while loop. If it reaches an undefined or null it stops prematurely, otherwise it returns the property requested. Finally, there is an alternative variable which will return optionally if either the thing is undefined or the value is null.
 <pre>
 <span class="Type">var</span> exists = <span class="Identifier">function</span> (path, base, alternate) {
   <span class="Statement">if</span> (<span class="Statement">typeof</span> path === <span class="Constant">&quot;undefined&quot;</span> || <span class="Statement">typeof</span> path === <span class="Constant">&quot;object&quot;</span>) <span class="Statement">return</span>
@@ -143,7 +143,7 @@ As you can see the essense of exists is pretty simple. First, split out the path
 </pre>
 </div>
 <h3 class="mb0">Interesting tricks of existential awareness!</h3>
-<pre id='vimCodeElement'>
+<pre class='vimCodeElement'>
 <span class="Comment">// here are some cool things you can do with exists</span>
 
 <span class="Comment">// somewhere in my project I have defined a function</span>
@@ -161,25 +161,35 @@ PAGE.exists(<span class="Constant">&quot;someAmazingModule.reload&quot;</span>, 
 <span class="Comment">// 3. return it and call it with 500 as the parameter</span>
 <span class="Comment">// 4. if it's not there, return and call anonymous function</span>
 </pre>
+</div>
 
-<h3 id="loadingProblem">The asynchronous loading problem</h3>
-A good practice to employ while coding complex projects is seperating concerns. Break down the functionaity from the Model or data, break apart the functionality by what it does. In javaScript, as in most other languages, this is done by saving different functions or objects as their own files, usually with a unique name for the file that corresponds to the unique name of the function or object. 
+<div id="loadingProblem" class="section">
+<h3>The asynchronous loading problem with javascript</h3>
+A good practice to employ while coding any complex project is separating concerns. Break down the functionality from the data, break apart the functionality by what it does. Break apart code that reads or writes to the database, writes cookies or localStorage. Headers, footers, tracking code etc etc. In javascript, as in other languages, this is done by saving different concerns as their own file, with a unique name for the file that corresponds to the unique name of the function or object or extension.
 
-Keep in mind however, that while writing and debugging your code it wise to keep things seperate, for production code it is best to bundle this all together, and shrink it down and compress it. As a project grows in complexity, remembering all of these names becomes a real problem. If only there was a way to group these objects and functions into a <i class="c">Namespace</i>.
+<u>So what's the problem?</u>
 
-Compiled language namespace solutions use a <i class="c">Using</i> statement towards the top of the file. Upon compilation, the required libraries are then hoisted into scope to be access by the code that needs them. In javascript it is not that simple because everything is loading asynchronously. 
+JavaScript differs from other languages however in that it is running in a browser. The browser is designed to work over a network, that could be fast or slow, where items on the page will progressively paint until everything is finished loading. If there are different files being loaded by the browser, some will load before others. This is what is known as asynchronous loading. Those who write code in compiled languages rarely have to face this problem or implement ways to resolve it. This is a huge source of grief for many developers new to javascript as they expect all things to be available now. 
 
-A working solution, though a bad one, would wait for all required libraries to be loaded, and then to run the code. Talk about two steps forward, three steps back. Could you imagine a website today waiting for the page to load all of the images before displaying a single line of text? 
+To add even more complexity, production code often differs from development code. Keep in mind that while writing and debugging your code it wise to keep files separate, have lots of comments, but for production it is best to bundle all the necessary files together, remove all redundant information, and shrink it down and compress it. 
+
+Compiled language namespace solutions use a <i class="c">Using</i> statement towards the top of the file. Upon compilation, the required libraries are then hoisted into scope to be accessed by the code that needs them. In javascript it is not that simple because everything is loading asynchronously.
+
+A working solution, though a bad one, would wait for all required libraries to be loaded before running the code. The problem with this is that some files might not be needed till long after the page finishes loading. Imagine a login popup which only needs to be loaded after you click the login button. A better solution is to break down the page into areas you want loaded first, or later.
 
 A better solution would split the work of a <i>Component</i> into the parts that can run without external <i>Components</i> and the parts that require external components. In this way the processor would work on the stuff that it can now, then get to the stuff that is still being loaded later. Thanks to the power of javascript you can do this very thing, as the scope in the closure allows full access to variables long after they are first loaded.
 
-And this is the essense of what has now become known as jdog.
+One of the advantages of jDog over Module loading scripts is the emphasis on Constructors and other non Module type objects. Later on I will expound upon the differences, but for this topic, Constructors are Functions that output Objects which can have Methods and properties. If you understand Object Oriented Architecture, Constructors can be thought of as a Class. In JavaScript, Constructors have even more functionality.
+</div>
+
+<div id="howPageWorks" class="section">
+<h3>How jDog tackles the asynchronous problem</h3>
+If jDog does anything well, it is tackling the asynchronous loading problem with web based javascript. The primary technique is quite simple. <a href="/api.html#wait">PAGE.wait</a>
 
 </div>
 
 <div class="section" id="order">
 <h2>The Order of things</h2>
-
 When working with asynchronous code, you never can be absolutely sure of the load order. For PAGE (jdog) to work properly, it should be added before any other PAGE items. Also, though it's not dependant on jQuery, it certainly interacts with jQuery faster if jQuery is loaded before PAGE. Normally I load jQuery through google's hosted library. This speeds up the page loading since the source is coming from a different domain.
 
 <h3>Ideal Order</h3>
@@ -197,7 +207,7 @@ When working with asynchronous code, you never can be absolutely sure of the loa
 <div class="section" id="structure">
 <h2>Structure of your PAGE</h2>
 
-To a large degree the structure of your page is up to you. <i>jdog</i> is not a framework like angular or similar libraries that requires a rigid structure or pattern to develop around. jdog is framework independant. This means you have more freedom to adapt other javascript libraries since there are no dependency conflicts to contend with. It really is up to you to structure your code the best way you can. jdog is a library management tool.
+To a large degree the structure of your page is up to you. <i>jdog</i> is not a framework like angular or similar libraries that requires a rigid structure or pattern to develop around. jdog is framework independent. This means you have more freedom to adapt other javascript libraries since there are no dependency conflicts to contend with. It really is up to you to structure your code the best way you can. jdog is a library management tool.
 
 Javascript is a very expressive language which allows for many different types of patterns. In my practice the following ways of grouping code have been beneficial.
 
@@ -246,17 +256,17 @@ Properties are a repository for holding all of the global variables for a site. 
 Third Party libraries can be added in different ways. Generally, external libraries add to the window object, and as such can be 'waited' for like everything else.
 
 To load the script from PAGE, you would use <a href="api.html#loadScript">PAGE.load</a>
-<pre id='vimCodeElement'>
+<pre class='vimCodeElement'>
 PAGE.load(<span class="Constant">&quot;/Scripts/folder/ExternalSpinnerExample.js&quot;</span>)
 </pre>
 if you have the script bundled, (as you should), you only need to reference it when it's loaded in the normal way, with the exception that you include the 'window' object as the root.
-<pre id='vimCodeElement'>
+<pre class='vimCodeElement'>
 PAGE.wait(<span class="Constant">&quot;window.ExternalSpinnerExample&quot;</span>, <span class="Identifier">function</span>(ExternalSpinnerExample) {
   ExternalSpinnerExample()
 })
 </pre>
 or
-<pre id='vimCodeElement'>
+<pre class='vimCodeElement'>
 PAGE.wait(
   <span class="Constant">&quot;window.ExternalSpinnerExample&quot;</span>
   , ref
@@ -268,7 +278,7 @@ PAGE.wait(
 
 <div class="section" id="jQuery2">
 <h2>jQuery is a special little library</h2>
-I don't claim to love many javascript libraries, but I do love jQuery. It's a special case, so much so in fact that PAGE built in integration for it. Normally for jQuery you would need the following to ensure that jQuery and the dom are ready to play together.
+I don't claim to love many javascript libraries, but I do love jQuery. It's a special case, so much so in fact that PAGE built in integration for it. Normally for jQuery you would need the following to ensure that jQuery and the DOM are ready to play together.
 <pre>
 $(document).ready(<span class="Identifier">function</span>() {
 <span class="Comment">  // lets do some good</span>
@@ -282,8 +292,8 @@ $(document).ready(<span class="Identifier">function</span>() {
   }()))
 })
 </pre>
-And though new HTML5 tricks bring fuel to the argument that it is nolonger required for DOM manipulation, there are so many wonderful libraries using jQuery, why not make it easy? So I created both <a href="api.html#add$">add$</a> and <a href="api.html#addWait$">addWait$</a>:
-<pre id='vimCodeElement'>
+And though new HTML5 tricks bring fuel to the argument that it is no longer required for DOM manipulation, there are so many wonderful libraries using jQuery, why not make it easy? So I created both <a href="api.html#add$">add$</a> and <a href="api.html#addWait$">addWait$</a>:
+<pre class='vimCodeElement'>
 <span class="Comment">// for simple adding</span>
 PAGE.add$(<span class="Constant">&quot;Modules.home&quot;</span>, (<span class="Identifier">function</span>() {
 
@@ -340,7 +350,7 @@ PAGE.extend(<span class="Identifier">function</span>(puppy, dog, log) {
 })
 </pre>
 
-As for convention, puppy is the instance, dog is the prototype, and log is any logging to console. It's easy to remember, that's why it's like that. If you must know, instance properties for PAGE act the same as prototype properties to PAGE. What's nice is to keep them seperated. In this way, prototype methods and properties can be hidden, and the output of typing PAGE is much cleaner.
+As for convention, puppy is the instance, dog is the prototype, and log is any logging to console. It's easy to remember, that's why it's like that. If you must know, instance properties for PAGE act the same as prototype properties to PAGE. What's nice is to keep them separated. In this way, prototype methods and properties can be hidden, and the output of typing PAGE is much cleaner.
 
 </div>
 

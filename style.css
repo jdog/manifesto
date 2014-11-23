@@ -1,22 +1,22 @@
-
 h1 { font-size:220%; margin-top: 0; padding-top: 53px;}
 h2 { font-size:180%; }
 h3 { font-size:150%; }
 .wrapper { margin:0px auto; max-width:780px; transition:all .4s; box-sizing:border-box; }
 pre { white-space: pre-wrap; font-family: monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
-body { font-family: verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 13px; line-height: 22px;}
+body { font-family: sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 15px; line-height: 170%;}
 html { background:transparent url(ricepaper_v3.png); }
 body { background:transparent url(vert-line.png); }
 * { font-size: 1em; }
 i.c { font-weight:bold; }
 i.c, .Constant { color: #39B24A; }
 
-.Type { color: #60ff60; }
+.vimCodeElement { line-height:120%; }
+.Type { color: rgba(96, 255, 96, 0.72); }
 .Statement { color: #C2C28E; }
-.Constant { color: #ffa0a0; }
+.Constant { color: rgba(255, 160, 160, 0.71); }
 .Identifier { color: #44D3D3; }
 .Special { color: #44D3D3; }
-.Comment { color: #159828; }
+.Comment { color: rgba(62, 182, 192, 0.5); }
 
 .jump { 
 	white-space:inherit;
@@ -97,15 +97,16 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #Editor .Actions { padding-bottom:5px; }
 #Editor .Actions button { }
 
-@media (min-width:0px) and (max-width:900px) {
+.Manifesto .wrapper { font-size:16px; }
+.Manifesto h4 { margin-bottom:-1em; }
+
+@media (min-width:0px) and (max-width:870px) {
 	#sidePanel.Open + .wrapper { padding-right:169px; }
+	.wrapper { max-width:initial; transition:all 1s; }
+	h1 { padding-left:18px; }
 }
-@media (min-width:901px) and (max-width:1100px) {
-	#sidePanel.Open + .wrapper { padding-right:70px; }
+@media (min-width:871px) and (max-width:1100px) {
+	#sidePanel.Open + .wrapper { padding-right:169px; max-width:initial; }
+	#sidePanel.Open + .wrapper h1 { padding-left:18px; }
 }
-
-
-
-
-
 
