@@ -1,13 +1,12 @@
 
-h1 { font-size:220%; }
+h1 { font-size:220%; margin-top: 0; padding-top: 53px;}
 h2 { font-size:180%; }
 h3 { font-size:150%; }
 .wrapper { margin:0px auto; max-width:780px; transition:all .4s; box-sizing:border-box; }
 pre { white-space: pre-wrap; font-family: monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
-body { font-family: verdana; color: #000000; padding:10px; background: rgb(255, 255, 245); font-size: 13px; line-height: 22px;}
-body {
-	background:transparent url(ricepaper_v3.png);
-}
+body { font-family: verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 13px; line-height: 22px;}
+html { background:transparent url(ricepaper_v3.png); }
+body { background:transparent url(vert-line.png); }
 * { font-size: 1em; }
 i.c { font-weight:bold; }
 i.c, .Constant { color: #39B24A; }
@@ -104,6 +103,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 @media (min-width:901px) and (max-width:1100px) {
 	#sidePanel.Open + .wrapper { padding-right:70px; }
 }
+
 
 
 

@@ -51,7 +51,9 @@
 
 <div id="organize" class="section">
 <h2>Organizing code</h2>
-There are many ways of organizing code to a website. From the early days of the web, with pure html, images, and maybe a few CGI scripts things were relatively easy. A few key folders, some files, and a few server settings. It's very easy to organize something that is simple which does very little. Things get more complicated as you introduce more functionality. As I write this in late 2014, javascript has become a driving force in the way developers think about and organize their web projects. There are many reasons for this trend, mostly boiling down to demand from consumers and product development requirements.
+There are many ways to organize code for a website. From the early days of the web, with pure html, images, and maybe a few CGI scripts things were relatively easy. A few key folders, some files, and a some server settings. It's very easy to organize something that is simple which does very little. Things get more complicated as you introduce more functionality. As I write this in late 2014, javascript has become a driving force in the way developers think about and organize their web projects. There are many reasons for this trend, mostly boiling down to demand from consumers and product development requirements. The bottom line is for your code to make sense, it needs to be organized, and consistently so.
+
+This is quite a challenge when you consider all of the possible ways of writing javaScript, and the many prevailing trends, existing libraries, and influential personalities who push this or that pattern or structure.
 </div>
 
 <div class="section" id="intro">
@@ -65,16 +67,13 @@ Viewing source (back in the day) would produce some serious speghetti. It took a
 For these reasons and many others I made the decision that for any new projects I would store things into a common variable called <i class="c">PAGE</i>. In that way, if I hadn't worked on the project in awhile I could type <i class="c">PAGE</i> in the console to peak at what was happening and get up to speed quickly.
 
 <h3 id="earlyExample">At first the code looked something like this:</h3>
-
 <pre>
   <span class="Statement">if</span> (<span class="Statement">typeof</span> PAGE === <span class="Constant">&quot;undefined&quot;</span>) {
     PAGE = { }
   }
   PAGE.SomeProperty = <span class="Constant">12314</span>
-
 </pre>
-
-But this technique got annoying, since you always had to check for null. And if you had nested properties, it got even worse.
+But this technique got annoying since you always had to check for null. And if you had nested properties, it gets even worse.
 
 <pre>
   <span class="Statement">if</span> (<span class="Statement">typeof</span> PAGE !== <span class="Constant">&quot;undefined&quot;</span>) {
@@ -87,28 +86,41 @@ But this technique got annoying, since you always had to check for null. And if 
 
   }
 </pre>
-
 This constant need for retrieving and adding nested properties (PAGE.Something.SomethingElse) prompted me to come up with a standard way of accessing nested properties inside the <i class="c">PAGE</i> variable or window object.
 
-This required PAGE to be it's own library, and to be loaded first. But it solved all problems of asynchronous loading. After a couple rewrites, I eventually came up with this type of syntax:
+This required PAGE to be it's own library, loading very early. Though this was itself annoying, it resolved a lot of common problems with asynchronous loading. After a couple rewrites, I eventually came up with this type of syntax:
 
 <h3 class="mb0">Checking if a path exists</h3>
-<pre>
-<span class="Comment">// if Part1 of SomeOtherThing of Something of PAGE exists return it</span>
-PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>)
+<pre id='vimCodeElement'>
+<span class="Comment">// the old way of doing it</span>
+<span class="Comment">// this is checking against the PAGE object</span>
+<span class="Type">var</span> part1 = (PAGE &amp;&amp; PAGE.Something &amp;&amp; PAGE.Something.SomeOtherThing) ?
+      PAGE.Something.SomeOtherThing.<span class="Statement">Part1</span> : <span class="Type">undefined</span>
 
-<span class="Comment">// if Part1 of SomeOtherThing of Something of window exists return it</span>
-PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>, window)
+<span class="Comment">// the way of dog</span>
+<span class="Type">var</span> part1 = PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>)
 
-<span class="Comment">// if Part1 of SomeOtherThing of Something of window exists return it, otherwise 123</span>
-PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>, window, <span class="Constant">123</span>)
+
+<span class="Comment">// the old way of doing it</span>
+<span class="Comment">// This checks against the window object</span>
+<span class="Type">var</span> part1 = (window.Something &amp;&amp; window.Something.SomeOtherThing) ?
+      window.Something.SomeOtherThing.<span class="Statement">Part1</span> : <span class="Type">undefined</span>
+
+<span class="Comment">// the way of dog</span>
+<span class="Type">var</span> part1 = PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>, window)
+
+<span class="Comment">// the old way of doing it</span>
+<span class="Comment">// This checks against the window object, return a default</span>
+<span class="Type">var</span> part1 = (window.Something &amp;&amp; window.Something.SomeOtherThing) ?
+      window.Something.SomeOtherThing.Part1 ? <span class="Constant">123</span> : <span class="Constant">123</span>
+
+<span class="Comment">// the way of dog</span>
+<span class="Type">var</span> part1 = PAGE.exists(<span class="Constant">&quot;Something.SomeOtherThing.Part1&quot;</span>, window, <span class="Constant">123</span>)
 </pre>
 
 <div class="expand">Source code for checking Existence</div>
 <div class="expanse">
-
 As you can see the essense of exists is pretty simple. First, split out the path by periods. The inner <i class="c">obj</i> variable gets redefined on each pass through the while loop. If it reaches an undefined or null it stops prematurely, otherwise it returns the property requested. Finally, there is an alternative variable which will return optionally if either the thing is undefined or the value is null.
-
 <pre>
 <span class="Type">var</span> exists = <span class="Identifier">function</span> (path, base, alternate) {
   <span class="Statement">if</span> (<span class="Statement">typeof</span> path === <span class="Constant">&quot;undefined&quot;</span> || <span class="Statement">typeof</span> path === <span class="Constant">&quot;object&quot;</span>) <span class="Statement">return</span>
@@ -128,12 +140,8 @@ As you can see the essense of exists is pretty simple. First, split out the path
   <span class="Statement">else</span>
     <span class="Statement">return</span> alternate
 }
-
-
 </pre>
-
 </div>
-
 <h3 class="mb0">Interesting tricks of existential awareness!</h3>
 <pre id='vimCodeElement'>
 <span class="Comment">// here are some cool things you can do with exists</span>
@@ -155,7 +163,9 @@ PAGE.exists(<span class="Constant">&quot;someAmazingModule.reload&quot;</span>, 
 </pre>
 
 <h3 id="loadingProblem">The asynchronous loading problem</h3>
-A good practice to employ while coding is seperating concerns. In javaScript this is done by saving different functions or objects as their own files, usually with a unique name for the file that corresponds to the unique name of the function or object. As a project grows in complexity, remembering all of these names becomes a real problem. If only there was a way to group these objects and functions into a <i class="c">Namespace</i>.
+A good practice to employ while coding complex projects is seperating concerns. Break down the functionaity from the Model or data, break apart the functionality by what it does. In javaScript, as in most other languages, this is done by saving different functions or objects as their own files, usually with a unique name for the file that corresponds to the unique name of the function or object. 
+
+Keep in mind however, that while writing and debugging your code it wise to keep things seperate, for production code it is best to bundle this all together, and shrink it down and compress it. As a project grows in complexity, remembering all of these names becomes a real problem. If only there was a way to group these objects and functions into a <i class="c">Namespace</i>.
 
 Compiled language namespace solutions use a <i class="c">Using</i> statement towards the top of the file. Upon compilation, the required libraries are then hoisted into scope to be access by the code that needs them. In javascript it is not that simple because everything is loading asynchronously. 
 
@@ -233,57 +243,87 @@ Properties are a repository for holding all of the global variables for a site. 
 
 <div class="section" id="thirdParty">
 <h2>Third Party Libraries</h2>
-Third Party libraries can be adapted into PAGE. jdog is pure javascript, but works best with jQuery. It can be modified for other DOM type libraries, but shouldn't have to. Third Party Libraries can be added in different ways, or waited for in different ways. Generally, external libraries add to the Global window object.
+Third Party libraries can be added in different ways. Generally, external libraries add to the window object, and as such can be 'waited' for like everything else.
 
-To load the script from PAGE, you would use PAGE.addExternalLib
-if you have the script bundled, and you only want to reference it, then you can get to it either with:
-
-PAGE.waitWindow
-PAGE.batchWaitWindow
-
-The benefit of batchWaitWindow is you can pass in many external library namespaces, and if you include a true flag, then the library will be added into PAGE.Lib. Later on you can simply call PAGE.wait("Lib.SomeLib", "Lib.SomeOtherLib", ref, function(...)
-
+To load the script from PAGE, you would use <a href="api.html#loadScript">PAGE.load</a>
+<pre id='vimCodeElement'>
+PAGE.load(<span class="Constant">&quot;/Scripts/folder/ExternalSpinnerExample.js&quot;</span>)
+</pre>
+if you have the script bundled, (as you should), you only need to reference it when it's loaded in the normal way, with the exception that you include the 'window' object as the root.
+<pre id='vimCodeElement'>
+PAGE.wait(<span class="Constant">&quot;window.ExternalSpinnerExample&quot;</span>, <span class="Identifier">function</span>(ExternalSpinnerExample) {
+  ExternalSpinnerExample()
+})
+</pre>
+or
+<pre id='vimCodeElement'>
+PAGE.wait(
+  <span class="Constant">&quot;window.ExternalSpinnerExample&quot;</span>
+  , ref
+  , <span class="Identifier">function</span>(ref) {
+  ref.ExternalSpinnerExample
+})
+</pre>
 </div>
 
 <div class="section" id="jQuery2">
 <h2>jQuery is a special little library</h2>
-I don't claim to love many javascript libraries, but I do love jQuery. It's a special case, so much so in fact that PAGE has it built in. Normally for jQuery you would need the following to ensure that jQuery is ready.
-
+I don't claim to love many javascript libraries, but I do love jQuery. It's a special case, so much so in fact that PAGE built in integration for it. Normally for jQuery you would need the following to ensure that jQuery and the dom are ready to play together.
 <pre>
 $(document).ready(<span class="Identifier">function</span>() {
-
 <span class="Comment">  // lets do some good</span>
-
 })
 </pre>
-
-But I love jQuery and really don't want to have to type this:
-
+But I love and use jQuery often, and really don't want to have to type this every time I want to use jQuery with jDog.
 <pre>
 $(document).ready(<span class="Identifier">function</span>() {
-
-
   PAGE.add(<span class="Constant">&quot;Modules.demo&quot;</span>, (<span class="Identifier">function</span>() {
-
 <span class="Comment">    // lets do some good</span>
-
   }()))
-
 })
 </pre>
+And though new HTML5 tricks bring fuel to the argument that it is nolonger required for DOM manipulation, there are so many wonderful libraries using jQuery, why not make it easy? So I created both <a href="api.html#add$">add$</a> and <a href="api.html#addWait$">addWait$</a>:
+<pre id='vimCodeElement'>
+<span class="Comment">// for simple adding</span>
+PAGE.add$(<span class="Constant">&quot;Modules.home&quot;</span>, (<span class="Identifier">function</span>() {
 
-So I created, out of necessity, the following:
+  <span class="Type">var</span> exports = {
+    $btn : $(<span class="Constant">&quot;button[name='Submit']&quot;</span>)
+    , $name : $(<span class="Constant">&quot;input[name='Name']&quot;</span>)
+  }
 
-<pre>
-PAGE.add$("Modules.demo", (function() {
+  exports.$btn.click(<span class="Identifier">function</span>() {
+    alert(<span class="Constant">&quot;clicked the button : value = &quot;</span> + exports.$btn.val())
+  })
 
-	// lets do some good
+  <span class="Statement">return</span> exports
+
+}()))
+
+
+<span class="Comment">// for simple waiting then adding</span>
+PAGE.addWait$(
+  <span class="Constant">&quot;Modules.home&quot;</span>
+  , [
+    <span class="Constant">&quot;window.jQuery.fn.select2&quot;</span>
+    , <span class="Constant">&quot;Modules.dataService.read&quot;</span>
+  ]
+  , (<span class="Identifier">function</span>(ref) {
+
+  <span class="Type">var</span> exports = {
+    $btn : $(<span class="Constant">&quot;button[name='Submit']&quot;</span>)
+    , $name : $(<span class="Constant">&quot;input[name='Name']&quot;</span>)
+  }
+
+  exports.$btn.click(<span class="Identifier">function</span>() {
+    alert(<span class="Constant">&quot;clicked the button : value = &quot;</span> + exports.$btn.val())
+  })
+
+  <span class="Statement">return</span> exports
 
 }()))
 </pre>
-
 The above code will first wait until jQuery is 'ready', ie, jQuery is loaded, and the DOM is ready, then it will add your module. Ideally you would only need this for Modules, since only modules interact directly with the DOM. Constructors and Functions only get instantiated after Modules, therefore it is fair to assume that jQuery is loaded.
-
 </div>
 
 <div class="section" id="extensions">
