@@ -1,9 +1,9 @@
 h1 { font-size:220%; margin-top: 0; padding-top: 53px;}
 h2 { font-size:180%; }
 h3 { font-size:150%; }
-.wrapper { margin:0px auto; max-width:780px; transition:all .4s; box-sizing:border-box; }
+.wrapper { margin:0px auto; max-width:880px; transition:all .4s; box-sizing:border-box; }
 pre { white-space: pre-wrap; font-family: monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
-body { font-family: sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 15px; line-height: 170%;}
+body { font-family: sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 17px; line-height: 170%;}
 html { background:transparent url(ricepaper_v3.png); }
 body { background:transparent url(vert-line.png); }
 * { font-size: 1em; }
@@ -52,10 +52,9 @@ dl { white-space:initial; }
 dl dt { font-weight:bold; margin:0; padding:0; }
 dl dd { margin:0 0 0 10px; padding:0; }
 
-#API { font-size:14px; }
 #API dl { margin:0; padding:0 15px; }
 #API dl dt:before { content:"\A0"; display:block; height:3px; }
-#API dl dt { margin:10px 0 0; color: rgb(218, 34, 42); display:inline; font-style:italic; font-weight:normal; }
+#API dl dt { margin:10px 0 0; color: rgb(0, 0, 0); display:inline; font-style:italic; font-weight: bold; }
 #API dl dd:before { content:"– "; }
 #API dl dd { display:inline; }
 #API { }
@@ -63,14 +62,14 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Title .Tags { font-size:14px; font-weight:normal; float:right; line-height:30px; }
 #API .Guts { padding:0 20px 20px; }
 #API .Source { float:right; }
-#API .Title .link { margin-left: 10px; color: rgba(0, 102, 255, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; position: absolute; margin-left: -40px; font-weight: normal; font-size: 15px;}
+#API .Title .link { margin-left: 10px; color: rgba(0, 102, 255, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; position: absolute; margin-left: -40px; font-weight: normal; }
 #API .Returns { font-weight:bold; }
 #API .Label { font-weight:bold; margin:1em 0 .4em; color: rgb(41, 124, 124); }
 #API .Returns .Label { font-weight:normal; }
 #API .Description { }
 #API .Definitions { }
 #API .Examples { }
-#API .Examples .Example { white-space:pre; font-family:monospace; padding: 15px 20px; border:1px dotted rgba(0,0,0,.1); margin: 0 -20px 5px; background-color: rgba(231, 247, 247, 0.55);}
+#API .Examples .Example { white-space:pre; font-family:monospace; padding: 15px 20px; border:1px dotted rgba(0,0,0,.1); margin: 0 -20px 5px; background-color: rgba(231, 247, 247, 0.55); line-height: 22px;}
 
 .Examples .keyword  {  color: #000000;  font-weight: bold;}
 .Examples .support  {  color: #000000; font-weight:bold; }
@@ -82,9 +81,9 @@ dl dd { margin:0 0 0 10px; padding:0; }
 .Examples .comment { color: rgba(0, 0, 0, 0.46); }
 .Examples .numeric { color: #000; font-weight:bold; }
 .Examples .function { color: #000; font-weight:bold; }
-.Examples .function.call { color: #000; font-weight:bold; }
+.Examples .function.call { color: rgba(0, 0, 0, 0.75); font-weight:bold; }
 .Examples .entity { color: #000; font-weight:bold; }
-.Examples .jDog { color: #000; font-weight:bold; }
+.Examples .jDog { color: #678F82; /* font-weight:bold; */ }
 .Examples .inQuotes { color: rgba(106, 112, 47, 0.86); font-weight:normal; font-style:italic; }
 .Examples .Dog { color: rgb(21, 117, 206); font-weight:bold; }
 
@@ -97,7 +96,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #Editor .Actions { padding-bottom:5px; }
 #Editor .Actions button { }
 
-.Manifesto .wrapper { font-size:16px; }
+.Manifesto .wrapper {  }
 .Manifesto h4 { margin-bottom:-1em; }
 
 @media (min-width:0px) and (max-width:870px) {
@@ -109,4 +108,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	#sidePanel.Open + .wrapper { padding-right:169px; max-width:initial; }
 	#sidePanel.Open + .wrapper h1 { padding-left:18px; }
 }
+
+
+
 

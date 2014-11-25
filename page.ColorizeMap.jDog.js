@@ -16,13 +16,5 @@ PAGE.add('ColorizeMap.jDog', [
 		'name': 'jDog',
 		'pattern': /\bref\.?/g
 	}
-	, {
-		'name': 'inQuotes',
-		'pattern': /"[^"]*"/g
-	}
-	, {
-		'name': 'inQuotes',
-		'pattern': /'[^']*'/g
-	}
 
 ])

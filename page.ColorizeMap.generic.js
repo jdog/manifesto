@@ -1,5 +1,17 @@
 PAGE.add("ColorizeMap.generic", [
 	{
+		'name': 'comment',
+		'pattern': /\/\/[^\n]*/g
+	},
+	{
+		'name': 'inQuotes',
+		'pattern': /"[^"]*"/g
+	},
+	{
+		'name': 'inQuotes',
+		'pattern': /'[^']*'/g
+	},
+	{
 		'matches': {
 			1: [
 				{
@@ -20,10 +32,6 @@ PAGE.add("ColorizeMap.generic", [
 			}
 		},
 		'pattern': /(\(|\s|\[|\=|:|\+|\.)(('|")([^\\\1]|\\.)*?(\3))/gm
-	},
-	{
-		'name': 'comment',
-		'pattern': /\/\/[^$]*/g
 	},
 	{
 		'name': 'comment',
