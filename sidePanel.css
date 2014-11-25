@@ -1,5 +1,5 @@
 #sidePanel { position:fixed; right: 0; top: 0; bottom: 0;}
-#sidePanel .icon { font-size: 54px; cursor: pointer; position:absolute; right:10px; top:10px; }
+#sidePanel .icon { font-size: 54px; cursor: pointer; position:absolute; right:20px; top:20px; }
 #sidePanel .guts { 
 	visibility:hidden; 
 	min-width:0; 
