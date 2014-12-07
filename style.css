@@ -149,6 +149,11 @@ dl dd { margin:0 0 0 10px; padding:0; }
 .Examples .inQuotes { color: rgba(106, 112, 47, 0.86); font-weight:normal; font-style:italic; }
 .Examples .Dog { color: rgb(21, 117, 206); font-weight:bold; }
 
+.Legend { padding: 0 20px 30px; }
+.Legend .Section { line-height:18px; }
+.Legend h4 { font-size:15px; }
+.Legend span { }
+.Legend a { display:inline-block; width:150px; font-size:13px; }
 
 #Editor { }
 #Editor .Editor,
@@ -170,6 +175,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	#sidePanel.Open + .wrapper { padding-right:169px; max-width:initial; }
 	#sidePanel.Open + .wrapper h1 { padding-left:18px; }
 }
+
 
 
 

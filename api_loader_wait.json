@@ -1,0 +1,28 @@
+{
+	"jDog" : "version 1.0"
+	, "Methods" : [
+		{
+			"Name" : "wait"
+			, "Usage" : [
+					[ "Path", "Callback" ]
+					, [ "String", "Function" ]
+					, [ "Path", "Path+", "Ref", "Callback" ]
+					, [ "String", "String+", "Object", "Function" ]
+				]
+			, "Tags" : [ "wait", "asynchronous" ]
+			, "Source" : [ "page.loader.js" ]
+			, "Examples" : [
+				"PAGE.wait('Modules.dataService.read', function(read){ ... }))"
+				, "PAGE.wait(\n 'Modules.dataService.read',\n 'Constructors.LocalStorage',\n ref,\n function(){ ... }))"
+				, " PAGE.wait( \n  'Modules.dataService' \n  , 'window.dropDown' \n  , 'Constructors.Login' \n  , ref \n  , init)"
+			]
+			, "Description" : "This is the foundation of waiting until library items are ready. Notice the Ref object. Unlike require js which pushes returns the modules in the arguments of the function, PAGE uses Ref. Ref is an object. In javascript, objects are passed by reference. By passing in an object into the second parameter, that will be the object which receives all of the library items being waited for. The name will be the name of the library item being waited for. For example, if you are waiting for Constructors.Pork, the ref will return { Pork : Object }"
+			, "Definitions" : {
+				"Path" : "Path of the library item required, example 'Constructors.YourConstructor'"
+				, "Ref" : "Reference Object to pass all library items into"
+				, "Callback" : "Function to call when all is loaded"
+			}
+			, "Returns" : "undefined"
+		}
+	]
+}

@@ -1,0 +1,77 @@
+{
+	"jDog" : "version 1.0"
+	, "Methods" : [
+		{
+			"Name" : "ext.events"
+			, "Usage" : [
+					[ "dog", "eventsMap" ]
+					, [ "Object", "Object" ]
+				]
+			, "Tags" : [ "extend", "extensions" ]
+			, "Source" : [ "page.extend.events.js" ]
+			, "Examples" : [ 
+				" PAGE.ext.events(dog, {\n  Success : []\n  , Fail : []\n  , SomeOtherEvent : []\n })"
+			]
+			, "Description" : "This is the way to intialize the events code for an object. First you must extend the object or (dog) in this way. Passing in the names / array of the events is optional but helpful in explaining the current events being expected."
+			, "Definitions" : {
+				"Name" : "The name of the event"
+				, "Func" : "Function to run when the event is triggered"
+			}
+			, "Returns" : "PAGE"
+		}
+		, {
+			"Name" : "addEvent"
+			, "Usage" : [
+					[ "Name", "Func" ]
+					, [ "String", "Function" ]
+				]
+			, "Tags" : [ "extend", "extensions" ]
+			, "Source" : [ "page.extend.events.js" ]
+			, "Examples" : [ 
+				"// dog.triggerEvent(\"Success\", data.id, data.name)\n\ndog.addEvent(\"Success\", function(id, name) {\n  console.log(id, name)\n})"
+			]
+			, "Description" : "Adds an event to the system"
+			, "Definitions" : {
+				"Name" : "The name of the event"
+				, "Func" : "Function to run when the event is triggered"
+			}
+			, "Returns" : "PAGE"
+		}
+
+		, {
+			"Name" : "triggerEvent"
+			, "Usage" : [
+					[ "Name", "Arg1", "Arg2", "Arg3", "..." ]
+				]
+			, "Tags" : [ "extend", "extensions" ]
+			, "Source" : [ "page.extend.events.js" ]
+			, "Examples" : [ 
+				"dog.triggerEvent(\"Success\", data.id, data.name)"
+			]
+			, "Description" : "Triggers the named event"
+			, "Definitions" : {
+				"Name" : "The name of the event"
+				, "Args" : "List of arguments that get passed to the function triggered by event"
+			}
+			, "Returns" : "PAGE"
+		}
+
+		, {
+			"Name" : "emptyEvent"
+			, "Usage" : [
+					[ "Name" ]
+				]
+			, "Tags" : [ "extend", "extensions" ]
+			, "Source" : [ "page.extend.events.js" ]
+			, "Examples" : [ 
+				"dog.emptyEvent(\"Success\")"
+			]
+			, "Description" : "Adds an event to the system"
+			, "Definitions" : {
+				"Name" : "The name of the event"
+			}
+			, "Returns" : "PAGE"
+		}
+
+	]
+}
