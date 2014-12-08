@@ -40,11 +40,15 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		var html = ""
 		for (var x in usage) {
 			html += "<div>"
-			html += "PAGE."
-			html += dog.data.Name
-			html += "("
-			html += usage[x].length ? usage[x].join(", ") : ""
-			html += ") "
+			if (usage[x][0] === false) {
+				html += usage[x][1]
+			} else {
+				html += "PAGE."
+				html += dog.data.Name
+				html += "("
+				html += usage[x].length ? usage[x].join(", ") : ""
+				html += ") "
+			}
 			html += "</div>"
 		}
 		return html
@@ -55,11 +59,11 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 			, data = dog.data 
 
 		html += "<div class='Title'>"
-		html += "<a name='" + data.Name + "' href='#" + data.Name + "' class='link'>§</a>"
 		html += "<span class='Tags'>"
 		html += data.Tags ? data.Tags.length ? data.Tags.join(", ") : "" : ""
 		html += "</span>"
 		html += data.Name
+		html += "<a name='" + data.Name + "' href='#" + data.Name + "' class='link'>§</a>"
 		html += "</div>"
 
 		html += "<div class='Guts'>"

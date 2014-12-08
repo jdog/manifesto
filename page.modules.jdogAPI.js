@@ -7,6 +7,7 @@ PAGE.loadScript(
 	, "page.ColorizeMap.generic.js"
 	, "page.Constructors.ColorizeCode.js"
 	, "page.clone.js"
+	, "page.modules.dom.js"
 	, true)
 
 PAGE.addWait(
@@ -16,6 +17,7 @@ PAGE.addWait(
 		"ajax"
 		, "Constructors.APIMethod" 
 		, "BatchCallback" 
+		, "Modules.dom"
 		, "ready" // dom is loaded
 	]
 
@@ -26,9 +28,10 @@ PAGE.addWait(
 			, methods : []
 			, sections : []
 			, e_root : document.querySelector("#API")
-			, e_legend : document.createElement("div")
+			, e_legend : document.querySelector("#APILegend")
 			, legend : { }
 			, batch : undefined
+			, firstSectionOpen : false
 		}
 		, J = jDog
 
@@ -102,11 +105,23 @@ PAGE.addWait(
 				title.innerHTML = index
 				section.appendChild(title)
 
+				section.addEventListener("click", function() {
+
+					var allSections = section.parentNode.querySelectorAll(".Section") || []
+
+					Array.prototype.forEach.call(allSections, function(item, i) {
+						ref.dom.removeClass(item, "Open")
+					})
+
+					ref.dom.addClass(section, "Open")
+
+				})
+
 				for (var y in item)
 				(function(index, item, arr) {
 
 					var elem = document.createElement("a")
-					elem.innerHTML = item.Name
+					elem.innerHTML = "┄ " + item.Name
 					elem.href = "#" + item.Name
 
 					section.appendChild(elem)
@@ -120,26 +135,35 @@ PAGE.addWait(
 
 		}
 
-		function buildAllSections() {
-
-			dog.batch = new ref.BatchCallback(5, function() {
+		function buildAllSections(arr) {
+			dog.batch = new ref.BatchCallback(arr.length, function() {
 				organizeLegend()
 				createLegend()
+
+				// trigger click on first section for legend
+				event = document.createEvent('HTMLEvents');
+				event.initEvent('click', true, false);
+				var elem = dog.e_legend.querySelector(".Section")
+				elem.dispatchEvent(event);
 			})
 
 			// built this way to improve perceived speed
 			// page should now load progressively
-			createSection("api_loader_add.json")
-			createSection("api_loader_wait.json")
-			createSection("api_loader_other.json")
-			createSection("api_base.json")
-			createSection("api_extend_events.json")
+			for (var x in arr) createSection( arr[x] )
 		}
 
 		function init() {
-			dog.e_legend.className = "Legend"
-			dog.e_root.appendChild(dog.e_legend)
-			buildAllSections()
+
+			buildAllSections([
+				"api_loader_add.json"
+				, "api_loader_wait.json"
+				, "api_loader_other.json"
+				, "api_base.json"
+				, "api_extend_events.json"
+				, "api_extend_batchCallback.json"
+				, "api_extend_clone.json"
+			])
+
 		}
 
 		init()

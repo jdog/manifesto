@@ -26,7 +26,25 @@
 	text-decoration: none;
 	color: white;
 }
-#sidePanel .guts div a:hover {
+
+.AlwaysOpen #sidePanel .guts {
+	padding-top:15px;
+	width: 250px; 
+	background-color: rgba(0, 0, 0, 0.79);
+}
+
+.AlwaysOpen #sidePanel .guts a,
+.AlwaysOpen #sidePanel .guts span {
+	font-size: 18px;
+	display: block;
+	padding: 1px 16px;
+	text-decoration: none;
+	color: white;
+}
+
+
+#sidePanel .guts div a:hover,
+#sidePanel .guts div a:active {
 	background-color: rgba(61, 228, 228, 0.44);
 }
 
@@ -37,7 +55,59 @@
 #sidePanel.Open .icon { }
 #sidePanel.Open .guts { visibility:visible; max-width: 300px; }
 
+#sidePanel .SubSection {
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+#sidePanel .SubSection .Section {
+	cursor:pointer;
+}
+
+#sidePanel .SubSection .Section h4 {
+	padding: 1px 16px;
+	margin: 0;
+	color:rgba(255,255,255,.7);
+	font-weight:normal;
+}
+
+#sidePanel .SubSection .Section a {
+	padding: 0;
+	font-size: 14px;
+	line-height: 114%;
+	font-weight: normal;
+	max-height:0;
+	visibility:hidden;
+	transition:all .4s;
+	opacity:0;
+	border-left:1px solid rgba(255,255,255,.7);
+	margin-left:20px;
+	color:rgba(255,255,255,.7);
+}
+
+#sidePanel .SubSection .Section.Open {
+	padding-bottom:20px;
+}
+
+#sidePanel .SubSection .Section.Open a {
+	max-height:initial;
+	visibility:visible;
+	padding: 5px 0;
+	opacity:1;
+}
+
+#sidePanel .SubSection .Section a:last-child {
+	height:2px;
+}
+
+#sidePanel .SubSection .Section.Open h4 {
+	color:rgba(255,255,255,1);
+}
+
 html, body { padding:0; margin:0; }
+
+
+
 
 
 

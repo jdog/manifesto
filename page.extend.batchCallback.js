@@ -25,8 +25,6 @@
 			}
 		}
 
-		this.run = function(arrayOfFunctions) {}
-
 	}, proto)
 
 

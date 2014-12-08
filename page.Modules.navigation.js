@@ -8,9 +8,14 @@ PAGE.add("Modules.navigation", (function() {
 			, e_guts : e_root.querySelector("div.guts")
 			, e_body : document.querySelector("body")
 			, isOpen : false
+			, alwaysOpen : false
 		}
+		, ref = dog.ref = { }
 
 		function events() {
+			if (dog.alwaysOpen) {
+				return
+			}
 
 			dog.e_body.addEventListener("click", function(e) {
 
@@ -38,6 +43,7 @@ PAGE.add("Modules.navigation", (function() {
 		}
 
 		function init() {
+			dog.alwaysOpen = (dog.e_body && dog.e_body.className && dog.e_body.className.search("AlwaysOpen") > -1)
 			events()
 		}
 

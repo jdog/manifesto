@@ -63,6 +63,12 @@ h1 { font-size: 280%; margin-top: 0; padding-top: 30px; padding-bottom: 30px;}
 h2 { font-size:180%; }
 h3 { font-size:150%; }
 .wrapper { margin:0px auto; max-width:880px; transition:all .4s; box-sizing:border-box; }
+.AlwaysOpen .wrapper {
+	max-width:initial; margin:0 0 0 0; padding-right:250px; padding-left:0px;
+}
+
+.AlwaysOpen h1 { padding-left:25px; }
+
 pre { white-space: pre-wrap; font-family: 'monoFont', monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
 body { font-family: 'copy', sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 17px; line-height: 170%;}
 html { background:transparent url(ricepaper_v3.png); }
@@ -123,7 +129,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Title .Tags { font-size:14px; font-weight:normal; float:right; line-height:30px; }
 #API .Guts { padding:0 20px 20px; }
 #API .Source { float:right; }
-#API .Title .link { margin-left: 10px; color: rgba(76, 174, 199, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; position: absolute; margin-left: -40px; font-weight: normal; }
+#API .Title .link { margin-left: 10px; color: rgba(76, 174, 199, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; font-weight: normal; }
 #API .Returns { font-weight:bold; }
 #API .Label { font-weight:bold; margin:1em 0 .4em; color: rgb(22, 180, 180); }
 #API .Returns .Label { font-weight: bold; }
@@ -149,11 +155,16 @@ dl dd { margin:0 0 0 10px; padding:0; }
 .Examples .inQuotes { color: rgba(106, 112, 47, 0.86); font-weight:normal; font-style:italic; }
 .Examples .Dog { color: rgb(21, 117, 206); font-weight:bold; }
 
+.Usage { font-family:monospace; font-size:16px; }
+.Usage .Label { font-family:"copy", sans-serif; }
+.Usage {}
+
 .Legend { padding: 0 20px 30px; }
 .Legend .Section { line-height:18px; }
 .Legend h4 { font-size:15px; }
 .Legend span { }
-.Legend a { display:inline-block; width:150px; font-size:13px; }
+.Legend a { display:inline-block; width:140px; font-size:13px; color: rgb(5, 127, 128); text-decoration:none; }
+.Legend a:after { content:"↧"; }
 
 #Editor { }
 #Editor .Editor,
@@ -174,9 +185,8 @@ dl dd { margin:0 0 0 10px; padding:0; }
 @media (min-width:871px) and (max-width:1100px) {
 	#sidePanel.Open + .wrapper { padding-right:169px; max-width:initial; }
 	#sidePanel.Open + .wrapper h1 { padding-left:18px; }
+
+	.AlwaysOpen #sidePanel.Open + .wrapper { padding-right:250px; max-width:initial; }
+	.AlwaysOpen #sidePanel.Open + .wrapper h1 { }
 }
-
-
-
-
 

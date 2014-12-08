@@ -180,14 +180,13 @@
 			, "Source" : [ "page.loader.js" ]
 			, "Examples" : [
 				"\n var dog = new Number()\n undefined\n PAGE.getType(dog)\n \"Num\"\n "
+				, "var elem = document.createElement(\"div\")\n// undefined\nPAGE.getType(elem)\n// \"HTMLDivElement\""
 			]
 			, "Description" : "This is an internal utility that is exposed for those who need it. It outputs the type of any kind of thing passed into it. Useful for Array vs Object, or all the kinds of HTML elements. Also has a special type for jQuery. If one of the major types, Array, String, Object, Boolean, Number, then it outputs as a 3 character string. Array - Arr. String - Str. Object - Obj. Boolean - Boo. Number - Num."
 			, "Definitions" : {
-				"WaitList" : "Array - list of other libraries required before callback is called"
-				, "Ref" : "Reference Object to pass all library items into"
-				, "Callback" : "Function to call when all is loaded"
+				"Thing" : "Any variable or literal"
 			}
-			, "Returns" : "undefined"
+			, "Returns" : "String"
 		}
 
 		, {

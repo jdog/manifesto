@@ -1,6 +1,6 @@
 PAGE.extend(function(puppy, dog, log) {
 
-	var clone = dog.clone = function(sourceObj, newObject, type) {
+	var clone = dog.clone = PAGE.spawn("ext.clone", function(sourceObj, newObject, type) {
 		for (var x in sourceObj) {
 			type = dog.getType(sourceObj[x])
 
@@ -34,6 +34,6 @@ PAGE.extend(function(puppy, dog, log) {
 		}
 
 		return newObject
-	}
+	})
 
 })

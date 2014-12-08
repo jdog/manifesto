@@ -5,25 +5,25 @@
 			"Name" : "ext.events"
 			, "Usage" : [
 					[ "dog", "eventsMap" ]
-					, [ "Object", "Object" ]
+					, [ "Object", "{ String Name : Array[Function] Events }" ]
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
 			, "Examples" : [ 
-				" PAGE.ext.events(dog, {\n  Success : []\n  , Fail : []\n  , SomeOtherEvent : []\n })"
+				"// Assumes dog is already define\n PAGE.ext.events(dog, {\n  Success : []\n  , Fail : []\n  , SomeOtherEvent : []\n })\n\n// how to add a function to the event array\n dog.addEvent(\"Success\", function(id, name) {\n   console.log(id, name)\n })\n\n// how you trigger an event\n dog.$submit(function() {\n   // lots of code\n   dog.triggerEvent(\"Success\", data.id, data.name)\n })"
 			]
-			, "Description" : "This is the way to intialize the events code for an object. First you must extend the object or (dog) in this way. Passing in the names / array of the events is optional but helpful in explaining the current events being expected."
+			, "Description" : "This is the way to intialize the events code for an object. First you must extend the object or (dog) in this way. Passing in the names / array of the events is optional but helpful in explaining the current events being expected. Named events are really arrays of functions that get called by triggerEvent. In this way different parts of your code can subscribe to the events of other parts without having to call the methods directly."
 			, "Definitions" : {
-				"Name" : "The name of the event"
-				, "Func" : "Function to run when the event is triggered"
+				"dog" : "An Object, Module, or part of Module"
+				, "Name" : "The name of the event"
+				, "Events" : "Array of Functions to run when the named event is triggered"
 			}
 			, "Returns" : "PAGE"
 		}
 		, {
 			"Name" : "addEvent"
 			, "Usage" : [
-					[ "Name", "Func" ]
-					, [ "String", "Function" ]
+					[ "string Name", "function Func" ]
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
@@ -41,7 +41,7 @@
 		, {
 			"Name" : "triggerEvent"
 			, "Usage" : [
-					[ "Name", "Arg1", "Arg2", "Arg3", "..." ]
+					[ "string Name", "argument Arg1", "argument Arg2", "..." ]
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
