@@ -11,6 +11,7 @@
 				]
 			, "Tags" : [ "wait", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.wait('Modules.dataService.read', function(read){ ... }))"
 				, "PAGE.wait(\n 'Modules.dataService.read',\n 'Constructors.LocalStorage',\n ref,\n function(){ ... }))"

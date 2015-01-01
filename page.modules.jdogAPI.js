@@ -2,6 +2,7 @@ PAGE.loadScript(
 	"page.ajax.js"
 	, "page.extend.batchCallback.js"
 	, "page.Constructors.APIMethod.js"
+	, "page.functions.createLegend.js"
 	, "page.ColorizeMap.javascript.js"
 	, "page.ColorizeMap.jDog.js"
 	, "page.ColorizeMap.generic.js"
@@ -82,69 +83,16 @@ PAGE.addWait(
 			})
 		}
 
-		function organizeLegend() {
-			for (var x in dog.sections)
-			for (var y in dog.sections[x])
-			(function(index, item, arr) {
-				if (!dog.legend[ item.Source[0] ])
-					dog.legend[ item.Source[0] ] = []
-					dog.legend[ item.Source[0] ].push( item )
-			}(y, dog.sections[x][y], dog.sections[x]))
-		}
 
-		// runs after all of the data has been loaded
-		function createLegend() {
-
-			for (var x in dog.legend) 
-			(function(index, item, obj) {
-				var section = document.createElement("div")
-					, title = document.createElement("h4")
-
-				section.className = "Section"
-
-				title.innerHTML = index
-				section.appendChild(title)
-
-				section.addEventListener("click", function() {
-
-					var allSections = section.parentNode.querySelectorAll(".Section") || []
-
-					Array.prototype.forEach.call(allSections, function(item, i) {
-						ref.dom.removeClass(item, "Open")
-					})
-
-					ref.dom.addClass(section, "Open")
-
-				})
-
-				for (var y in item)
-				(function(index, item, arr) {
-
-					var elem = document.createElement("a")
-					elem.innerHTML = "┄ " + item.Name
-					elem.href = "#" + item.Name
-
-					section.appendChild(elem)
-
-				}(y, item[y], item))
-
-				// append it to the page at the end
-				dog.e_legend.appendChild(section)
-
-			}(x, dog.legend[x], dog.legend))
-
+		function legend() {
+			PAGE.wait("Functions.createLegend", ref, function() {
+				ref.createLegend(ref.dom, dog)
+			})
 		}
 
 		function buildAllSections(arr) {
 			dog.batch = new ref.BatchCallback(arr.length, function() {
-				organizeLegend()
-				createLegend()
-
-				// trigger click on first section for legend
-				event = document.createEvent('HTMLEvents');
-				event.initEvent('click', true, false);
-				var elem = dog.e_legend.querySelector(".Section")
-				elem.dispatchEvent(event);
+				legend()
 			})
 
 			// built this way to improve perceived speed

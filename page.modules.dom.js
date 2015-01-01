@@ -1,23 +1,36 @@
 PAGE.add("Modules.dom", (function() {
 
+	var dog = {
+	}
+
 	// copied from http://stackoverflow.com/questions/195951/change-an-elements-css-class-with-javascript
 
-	function hasClass(ele, cls) {
+	var hasClass = dog.hasClass = function (ele, cls) {
 		return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 	}
 
-	function addClass(ele, cls) {
-		if (!this.hasClass(ele, cls)) ele.className += " " + cls;
+	var addClass = dog.addClass = function (ele, cls) {
+		if (!hasClass(ele, cls)) ele.className += " " + cls;
 	}
 
-	function removeClass(ele, cls) {
+	var removeClass = dog.removeClass = function (ele, cls) {
 		if (hasClass(ele, cls)) {
 			var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
 			ele.className = ele.className.replace(reg, ' ');
 		}
 	}
 
-	function replaceClass(ele, oldClass, newClass){
+	var siblings = dog.siblings = function(node, children) {
+    var siblingList = [];
+    for (var n = children.length - 1; n >= 0; n--) {
+        if (children[n] != node) {
+            siblingList.push(children[n]);
+        }  
+    }
+    return siblingList;
+	}
+
+	var replaceClass = dog.replaceClass = function (ele, oldClass, newClass){
 		if(hasClass(ele, oldClass)){
 			removeClass(ele, oldClass);
 			addClass(ele, newClass);
@@ -25,7 +38,7 @@ PAGE.add("Modules.dom", (function() {
 		return;
 	}
 
-	function toggleClass(ele, cls1, cls2){
+	var toggleClass = dog.toggleClass = function (ele, cls1, cls2){
 		if(hasClass(ele, cls1)){
 			replaceClass(ele, cls1, cls2);
 		}else if(hasClass(ele, cls2)){
@@ -35,20 +48,6 @@ PAGE.add("Modules.dom", (function() {
 		}
 	}
 
-	// IE9+ only
-	function siblings(el) {
-		Array.prototype.filter.call(el.parentNode.children, function(child){
-			return child !== el
-		})
-	}
-
-	return {
-		hasClass : hasClass
-		, addClass : addClass
-		, removeClass : removeClass
-		, replaceClass : replaceClass
-		, toggleClass : toggleClass
-		, siblings : siblings
-	}
+	return dog
 
 }()))

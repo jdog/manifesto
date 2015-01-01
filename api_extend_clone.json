@@ -9,6 +9,7 @@
 				]
 			, "Tags" : [ "Constructor", "extend", "extensions" ]
 			, "Source" : [ "page.extend.batchCallback.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"var nested = {\n  lots : \"hello\"\n  , evenMore : new Date()\n}\n\nvar obj = {\n  myStuff : new Date()\n  , nested : nested\n  , more : []\n}\n\nvar copy = PAGE.ext.clone(obj, {})"
 			]

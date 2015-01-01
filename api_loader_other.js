@@ -9,6 +9,7 @@
 				]
 			, "Tags" : [ "wait", "module pattern", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.addWait( \n  'Modules.homePage' // path \n  , [                // required libraries\n      'ajax'\n      , 'ready'\n      , 'Constructors.APIMethods'\n  ]\n  , function(ref) {  // callback\n \n   var exports = { \n     apiMethods : undefined // see below\n   }\n\n   exports.loadPage = function() {\n     ref.ajax(\"/pathToSomething\", {}, function(data) {\n       // ... lots of your code here\n       exports.apiMethods = ref.APIMethods(data)\n     })\n   }\n \n   return exports \n \n  })"
 			]
@@ -28,6 +29,7 @@
 				]
 			, "Tags" : [ "wait", "module pattern", "jQuery", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.addWait$(\n 'Modules.jdogAPI'\n , [\n  'ajax'\n  , 'ready'\n  , 'Constructors.APIMethod'\n ],\n function(ref){ ... }))"
 				, "PAGE.addWait$(\n \"Modules.home\"\n , [\n  \"Constructors.Validation\"\n  , \"Modules.tracking\"\n ]\n , function(ref) {\n\n  var dog = {\n   $loginForm : $(\"#LoginForm\")\n   , $submit : $(\"#LoginForm button.Submit\")\n  }\n\n  function events() {\n\n   dog.validation = ref.Validation(\n    $(\"#LoginForm\")\n    , function success(data) {\n     ref.tracking.track(\n      \"Submit Success\"\n      , data\n      , function() { window.location = \"/dashboard\" })\n    }\n    , function fail() {\n     ref.tracking.track(\"Submit Failed\") \n    })\n\n   dog.$loginForm.submit(function() {\n    ref.tracking.track(\"Submit\") \n   })\n\n  }\n\n  events()\n\n  return dog\n\n })\n"
@@ -48,6 +50,7 @@
 				]
 			, "Tags" : [ "extend", "module pattern", "extensions", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.extend(function(puppy, dog, log) {})"
 				, "PAGE.extend(function(inst, proto, log) {})"
@@ -70,6 +73,7 @@
 				]
 			, "Tags" : [ "spawn", "test", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.add$('Modules.login', (function(){ ... }()))"
 			]
@@ -90,6 +94,7 @@
 				]
 			, "Tags" : [ "exists", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"// checks PAGE.Properties.User\nvar user = PAGE.exists('Properties.User')"
 				, "// checks window.Properties.User\nvar user = PAGE.exists('Properties.User', window)"
@@ -116,6 +121,7 @@
 				]
 			, "Tags" : [ "exists", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.waitExists('Properties.User', function(User) { ... })"
 				, "PAGE.waitExists('Properties.User', window, function(User) { ... })"
@@ -137,6 +143,7 @@
 				]
 			, "Tags" : [ "spawn", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.spawn('SomeVery.long.path.deep.in.your.code', { code : 'blahblahblah' })"
 				, "var out = PAGE.spawn('SomeVery.long.path.deep.in.your.code', { code : 'blahblahblah' })"
@@ -158,6 +165,7 @@
 				]
 			, "Tags" : [ "wait", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.batchWaitRef(['Modules.dataService', 'Modules.dataService.read'], ref, function(){ ... }))"
 				, "PAGE.batchWaitRef('Modules.dataService.read', 'Constructors.LocalStorage', ref, function(){ ... }))"
@@ -178,6 +186,7 @@
 				]
 			, "Tags" : [ "utility", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"\n var dog = new Number()\n undefined\n PAGE.getType(dog)\n \"Num\"\n "
 				, "var elem = document.createElement(\"div\")\n// undefined\nPAGE.getType(elem)\n// \"HTMLDivElement\""
@@ -196,6 +205,7 @@
 				]
 			, "Tags" : [ "utility", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 
 				" function test() { \n  var map = PAGE.mapArguments(arguments) \n  console.log(map) \n } \n \n test(1234, 'Hello World', 513, {}, [], document.createElement('div')) \n\n Object \n Arr: Array[1] \n HTMLDivElement: Array[1] \n Num: Array[2] \n Obj: Array[1] \n Str: Array[1]\n "

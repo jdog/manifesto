@@ -8,6 +8,7 @@
 				]
 			, "Tags" : [ "spawn", "test", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.add('Constructors.Login', function( $root, options ){  \n   var exports = {\n     $root : $root\n     , options : options\n   }\n\n  function privateFunction() {\n  }\n\n  exports.publicFunction = function() {\n  }\n\n   return exports \n })"
 				, "// assuming Select2 was defined in the same file above\nPAGE.add('Lib.Select2', Select2)"

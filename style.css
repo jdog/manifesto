@@ -177,6 +177,10 @@ dl dd { margin:0 0 0 10px; padding:0; }
 .Manifesto .wrapper {  }
 .Manifesto h4 { margin-bottom:-1em; }
 
+#symbols {
+	position:relative;
+}
+
 @media (min-width:0px) and (max-width:870px) {
 	#sidePanel.Open + .wrapper { padding-right:169px; }
 	.wrapper { max-width:initial; transition:all 1s; }

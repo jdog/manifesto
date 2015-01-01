@@ -9,6 +9,7 @@
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"// Assumes dog is already define\n PAGE.ext.events(dog, {\n  Success : []\n  , Fail : []\n  , SomeOtherEvent : []\n })\n\n// how to add a function to the event array\n dog.addEvent(\"Success\", function(id, name) {\n   console.log(id, name)\n })\n\n// how you trigger an event\n dog.$submit(function() {\n   // lots of code\n   dog.triggerEvent(\"Success\", data.id, data.name)\n })"
 			]
@@ -27,6 +28,7 @@
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"// dog.triggerEvent(\"Success\", data.id, data.name)\n\ndog.addEvent(\"Success\", function(id, name) {\n  console.log(id, name)\n})"
 			]
@@ -45,6 +47,7 @@
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"dog.triggerEvent(\"Success\", data.id, data.name)"
 			]
@@ -63,6 +66,7 @@
 				]
 			, "Tags" : [ "extend", "extensions" ]
 			, "Source" : [ "page.extend.events.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"dog.emptyEvent(\"Success\")"
 			]

@@ -8,6 +8,7 @@
 				]
 			, "Tags" : [ "Constructor", "extend", "extensions" ]
 			, "Source" : [ "page.extend.batchCallback.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 				"function buildAllSections(arr) {\n  dog.batch = new ref.BatchCallback(arr.length, function() {\n    organizeLegend()\n    createLegend()\n  })\n\n  // built this way to improve perceived speed\n  // page should now load progressively\n  for (var x in arr) createSection( arr[x] )\n}\n\nfunction createSection(url) {\n\n  var e_section = document.createElement(\"div\")\n    , section = []\n\n  // adds it in the order it comes\n  dog.sections.push(section)\n  dog.e_root.appendChild(e_section)\n\n  J.ajax.get(\n    url\n    , {}\n    , function(raw) {\n      var data = dog.data = JSON.parse(raw)\n\n      // keeps the memory reference alive\n      for (var x in data.Methods) section.push( data.Methods[x] )\n\n      build(e_section, data.Methods)\n\n      // run the callback when it's done\n      dog.batch.tryFinish()\n  })\n}"
 			]
@@ -27,6 +28,7 @@
 			]
 			, "Tags" : [ "Constructor", "extend", "extensions" ]
 			, "Source" : [ "page.extend.batchCallback.js" ]
+			, "Parent" : [ "Extensions" ]
 			, "Examples" : [ 
 			]
 

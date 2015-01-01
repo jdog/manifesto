@@ -6,6 +6,12 @@
 * Created by Justin Kempton
 *
 *
+*    ᒌ ᒉ
+*          
+*    ᶿ ᶿ   
+*   \ ᴥ / 
+*     ⋓
+*    
 *
 * This is the loader for the PAGE library, it should either be part of the bundled (compressed javascript) or on the html page itself
 *

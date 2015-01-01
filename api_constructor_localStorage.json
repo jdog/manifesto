@@ -1,0 +1,42 @@
+{
+	"jDog" : "version 1.0"
+	, "Methods" : [
+		{
+			"Name" : "Constructors.LocalStorage"
+			, "Usage" : [
+					[ false, "var ls = PAGE.Constructors.LocalStorage (string parentName, object options)" ]
+				]
+			, "Tags" : [ "Constructor", "extend", "extensions" ]
+			, "Source" : [ "page.Constructors.LocalStorage.js" ]
+			, "Parent" : [ "Constructors" ]
+			, "Examples" : [ 
+				""
+			]
+
+			, "Description" : "A normalized way of dealing with localStorage and or cookie data as JSON formatted text. Each new instance represents a single property of the window.localStorage object."
+			, "Definitions" : {
+				"parentName" : "The name of the window.localStorage property"
+				, "options" : "Object with options to pass in"
+				, "options.useCookie" : "Boolean value, forces system to use cookies instead of localStorage"
+			}
+			, "Returns" : "new LocalStorage object"
+		}
+		, {
+			"Name" : "batch.tryFinish"
+			, "Usage" : [
+				[ false, "batch.tryFinish()"]
+			]
+			, "Tags" : [ "Constructor", "extend", "extensions" ]
+			, "Source" : [ "page.extend.batchCallback.js" ]
+			, "Parent" : [ "Extensions" ]
+			, "Examples" : [ 
+			]
+
+			, "Description" : "Upon defining a new new batch each callback runs tryFinish until the total count is reached."
+			, "Definitions" : { 
+				"batch" : "The stored batch"
+			}
+			, "Returns" : "Undefined"
+		}
+	]
+}

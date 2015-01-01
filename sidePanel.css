@@ -43,6 +43,7 @@
 }
 
 
+#sidePanel .guts div a.Clicked,
 #sidePanel .guts div a:hover,
 #sidePanel .guts div a:active {
 	background-color: rgba(61, 228, 228, 0.44);
@@ -69,6 +70,23 @@
 	margin: 0;
 	color:rgba(255,255,255,.7);
 	font-weight:normal;
+	transition:all .4s;  
+	font-size:14px;
+}
+
+#sidePanel .SubSection .Section .Section h4 {
+	border-left:1px solid rgba(255,255,255,.7);
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+#sidePanel .SubSection .Section .Section {
+	visibility:hidden;
+	max-height:0;
+	padding: 0;
+	opacity:0;
+	overflow:hidden;
+	transition:all .4s;  
 }
 
 #sidePanel .SubSection .Section a {
@@ -76,8 +94,8 @@
 	font-size: 14px;
 	line-height: 114%;
 	font-weight: normal;
-	max-height:0;
 	visibility:hidden;
+	max-height:0;
 	transition:all .4s;
 	opacity:0;
 	border-left:1px solid rgba(255,255,255,.7);
@@ -86,7 +104,26 @@
 }
 
 #sidePanel .SubSection .Section.Open {
-	padding-bottom:20px;
+}
+
+#sidePanel .SubSection .Section.Open .Section {
+	visibility:visible;
+	opacity:1;
+	max-height:initial;
+}
+
+#sidePanel .SubSection .Section.Open .Section a {
+	visibility:hidden;
+	max-height:0;
+	opacity:0;
+	padding: 0;
+}
+
+#sidePanel .SubSection .Section.Open .Section.Open a {
+	max-height:initial;
+	visibility:visible;
+	padding: 5px 0;
+	opacity:1;
 }
 
 #sidePanel .SubSection .Section.Open a {
@@ -96,15 +133,13 @@
 	opacity:1;
 }
 
-#sidePanel .SubSection .Section a:last-child {
-	height:2px;
-}
-
 #sidePanel .SubSection .Section.Open h4 {
 	color:rgba(255,255,255,1);
 }
 
 html, body { padding:0; margin:0; }
+
+
 
 
 

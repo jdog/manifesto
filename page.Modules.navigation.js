@@ -1,8 +1,8 @@
 PAGE.add("Modules.navigation", (function() {
 
 		var e_root = document.getElementById("sidePanel")
-
-		var dog = {
+		, f = new Function()
+		, dog = {
 			e_root : e_root
 			, e_icon : e_root.querySelector("span.icon")
 			, e_guts : e_root.querySelector("div.guts")

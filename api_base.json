@@ -12,6 +12,7 @@
 				]
 			, "Tags" : [ "utility", "synchronous", "loading" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.loadScript('/Content/css/buttons.js')"
 				, "PAGE.loadScript('/Content/css/buttons.js', true)"
@@ -35,6 +36,7 @@
 				]
 			, "Tags" : [ "utility", "synchronous", "loading" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"PAGE.loadStyle('/Content/css/buttons.css')"
 				, "PAGE.loadStyle('/Content/css/buttons.css', true)"
@@ -57,6 +59,7 @@
 				]
 			, "Tags" : [ "utility", "asynchronous", "loading" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 
 				"PAGE.addExternalLibrary( \n  '/Scripts/SpecialDropDown.js' \n  , 'jQuery.fn.dropDrop' \n  , function() { \n \n   $('#Droper').dropDrop() \n \n })"
@@ -81,6 +84,7 @@
 				]
 			, "Tags" : [ "swap", "delete", "remove", "synchronous", "testing", "mocking" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 				"var old = PAGE.remove('Modules.dataService.read.getAll')"
 				, "PAGE.remove('Modules.dataService.read.getAll', PAGE, function(){})"
@@ -103,6 +107,7 @@
 				]
 			, "Tags" : [ "swap", "delete", "remove", "synchronous", "testing", "mocking" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 			]
 			, "Description" : "This is a specialized utility for swapping out many different library items with the ability to restore them later. Used for testing code then returning it back to it's original state."
@@ -119,6 +124,7 @@
 				]
 			, "Tags" : [ "hiding", "hacking" ]
 			, "Source" : [ "page.base.js" ]
+			, "Parent" : [ "Base" ]
 			, "Examples" : [
 			]
 			, "Description" : "This is an experimental method of hiding the PAGE variable."
