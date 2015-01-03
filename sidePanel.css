@@ -29,7 +29,7 @@
 
 .AlwaysOpen #sidePanel .guts {
 	padding-top:15px;
-	width: 250px; 
+	width: 300px; 
 	background-color: rgba(0, 0, 0, 0.79);
 }
 
@@ -54,7 +54,7 @@
 }
 
 #sidePanel.Open .icon { }
-#sidePanel.Open .guts { visibility:visible; max-width: 300px; }
+#sidePanel.Open .guts { visibility:visible; max-width: 310px; }
 
 #sidePanel .SubSection {
     font-size: 14px;
@@ -138,6 +138,7 @@
 }
 
 html, body { padding:0; margin:0; }
+
 
 
 

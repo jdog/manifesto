@@ -2,6 +2,7 @@ PAGE.loadScript(
 	"page.ajax.js"
 	, "page.extend.batchCallback.js"
 	, "page.Constructors.APIMethod.js"
+	, "page.Constructors.APIIndex.js"
 	, "page.functions.createLegend.js"
 	, "page.ColorizeMap.javascript.js"
 	, "page.ColorizeMap.jDog.js"
@@ -33,6 +34,7 @@ PAGE.addWait(
 			, legend : { }
 			, batch : undefined
 			, firstSectionOpen : false
+			, apiIndex : undefined
 		}
 		, J = jDog
 
@@ -83,11 +85,17 @@ PAGE.addWait(
 			})
 		}
 
-
 		function legend() {
-			PAGE.wait("Functions.createLegend", ref, function() {
-				ref.createLegend(ref.dom, dog)
-			})
+			PAGE.wait(
+				"Functions.createLegend"
+				, "Constructors.APIIndex"
+				, ref
+				, function() {
+					ref.createLegend(ref.dom, dog)
+
+					dog.apiIndex = ref.APIIndex(dog.e_legend, dog.methods, dog.e_root)
+
+				})
 		}
 
 		function buildAllSections(arr) {
@@ -110,6 +118,8 @@ PAGE.addWait(
 				, "api_extend_events.json"
 				, "api_extend_batchCallback.json"
 				, "api_extend_clone.json"
+				, "api_constructor_localStorage.json"
+				, "api_modules_urlParams.json"
 			])
 
 		}

@@ -26,30 +26,6 @@
 	font-style: italic;
 }
 
-
-/*
-@font-face {
-	font-family: 'monoFont';
-	src: url('saxmono.woff') format('truetype');
-	font-weight: 400;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'monoFont';
-	src: url('luximi-webfont.woff') format('woff');
-	font-weight: 400;
-	font-style: italic;
-}
-
-@font-face {
-	font-family: 'monoFont';
-	src: url('luximb-webfont.woff') format('woff');
-	font-weight: 600;
-	font-style: normal;
-}
-*/
-
 @font-face {
 	font-family: 'headings';
 	src: url('FFF_Tusj-webfont.woff') format('woff');
@@ -64,7 +40,7 @@ h2 { font-size:180%; }
 h3 { font-size:150%; }
 .wrapper { margin:0px auto; max-width:880px; transition:all .4s; box-sizing:border-box; }
 .AlwaysOpen .wrapper {
-	max-width:initial; margin:0 0 0 0; padding-right:250px; padding-left:0px;
+	max-width:initial; margin:0 0 0 0; padding-right:300px; padding-left:0px;
 }
 
 .AlwaysOpen h1 { padding-left:25px; }
@@ -136,7 +112,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Description { }
 #API .Definitions { }
 #API .Examples { }
-#API .Examples .Example { white-space:pre; font-family:
+#API .Examples .Example { white-space:pre-wrap; font-family:
 'monoFont', monospace; padding: 15px 20px; border:1px dotted rgba(0,0,0,.1); margin: 0 0px 5px; background-color: rgba(255, 255, 255, 0.55); line-height: 22px; font-size:14px; }
 
 .Examples .keyword  {  color: #000000;  font-weight: bold;}
@@ -190,7 +166,8 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	#sidePanel.Open + .wrapper { padding-right:169px; max-width:initial; }
 	#sidePanel.Open + .wrapper h1 { padding-left:18px; }
 
-	.AlwaysOpen #sidePanel.Open + .wrapper { padding-right:250px; max-width:initial; }
+	.AlwaysOpen #sidePanel.Open + .wrapper { padding-right: 300px; max-width:initial; }
 	.AlwaysOpen #sidePanel.Open + .wrapper h1 { }
 }
+
 

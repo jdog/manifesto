@@ -75,22 +75,35 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		html += "<div class='Label'>Usage:</div>"
 		html += buildUsage(data.Usage)
 		html += "</div>"
-		html += "<div class='Label'>Definitions:</div>"
-		html += "<dl class='Definitions'>"
-		html += buildDefinitions(data.Definitions)
-		html += "</dl>"
-		html += "<div class='Returns'>"
-		html += "<div class='Label'>Returns:</div>"
-		html += data.Returns
-		html += "</div>"
-		html += "<div class='Description'>"
-		html += "<div class='Label'>Description:</div>"
-		html += data.Description
-		html += "</div>"
-		html += "<div class='Examples'>"
-		html += "<div class='Label'>Examples:</div>"
-		html += buildExamples(data.Examples)
-		html += "</div>"
+
+		if (data.Definitions) {
+			html += "<div class='Label'>Definitions:</div>"
+			html += "<dl class='Definitions'>"
+			html += buildDefinitions(data.Definitions)
+			html += "</dl>"
+		}
+
+		if (data.Returns) {
+			html += "<div class='Returns'>"
+			html += "<div class='Label'>Returns:</div>"
+			html += data.Returns
+			html += "</div>"
+		}
+
+		if (data.Description) {
+			html += "<div class='Description'>"
+			html += "<div class='Label'>Description:</div>"
+			html += data.Description
+			html += "</div>"
+		}
+
+		if (data.Examples) {
+			html += "<div class='Examples'>"
+			html += "<div class='Label'>Examples:</div>"
+			html += buildExamples(data.Examples)
+			html += "</div>"
+		}
+
 		html += "</div>"
 
 		dog.e_methods.innerHTML = html

@@ -48,7 +48,9 @@ PAGE.add("Functions.createLegend", function(dom, dog) {
 						elem.innerHTML = "┄┄ " + method.Name
 						elem.href = "#" + method.Name
 
-						elem.addEventListener("click", function(e) {
+						method.e_legendItem = elem
+
+						var click = function(e) {
 							e.stopPropagation()
 
 							for (var x = dog.legend.e_allMethods.length; x--;)
@@ -56,7 +58,13 @@ PAGE.add("Functions.createLegend", function(dom, dog) {
 
 							dom.addClass( e.target, "Clicked")
 
-						})
+							e.target.parentNode.dispatchEvent(new Event("click"))
+							e.target.parentNode.parentNode.dispatchEvent(new Event("click"))
+
+						}
+
+						elem.addEventListener("fakeClick", click)
+						elem.addEventListener("click", click)
 
 						section.appendChild(elem)
 
@@ -85,20 +93,17 @@ PAGE.add("Functions.createLegend", function(dom, dog) {
 
 	function events() {
 		// trigger click on first section for legend
-		event = document.createEvent('HTMLEvents');
-		event.initEvent('click', true, false);
 		var elem = dog.e_legend.querySelector(".Section")
-		elem.dispatchEvent(event);
-
+		elem.dispatchEvent(new Event("click"))
 
 		;(function(e_allSections) {
 
 			for (var x = e_allSections.length; x--;)
-			(function(index, section, allSections) {
+			(function(index, e_section, allSections) {
 
-				var e_siblings = dom.siblings( section, section.parentNode.children )
+				var e_siblings = dom.siblings( e_section, e_section.parentNode.children )
 
-				section.addEventListener("click", function(e) {
+				e_section.addEventListener("click", function(e) {
 
 					e.stopPropagation()
 
@@ -106,11 +111,10 @@ PAGE.add("Functions.createLegend", function(dom, dog) {
 						dom.removeClass(e_siblings[x], "Open")
 					}
 
-					if (dom.hasClass(section, "Open")) {
-						dom.removeClass(section, "Open")
-
+					if (dom.hasClass(e_section, "Open")) {
+						// dom.removeClass(e_section, "Open")
 					} else {
-						dom.addClass(section, "Open")
+						dom.addClass(e_section, "Open")
 					}
 
 				})
