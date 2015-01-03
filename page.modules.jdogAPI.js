@@ -2,7 +2,7 @@ PAGE.loadScript(
 	"page.ajax.js"
 	, "page.extend.batchCallback.js"
 	, "page.Constructors.APIMethod.js"
-	, "page.Constructors.APIIndex.js"
+	, "page.constructors.APIIndex.js"
 	, "page.functions.createLegend.js"
 	, "page.ColorizeMap.javascript.js"
 	, "page.ColorizeMap.jDog.js"
