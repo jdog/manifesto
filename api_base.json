@@ -5,10 +5,9 @@
 		{
 			"Name" : "loadScript"
 			, "Usage" : [
-					[ "pathToFile" ]
-					, [ "pathToFile", "pathToFile", "pathToFile", "pathToFile" ]
-					, [ "pathToFile", "allowCache" ]
-					, [ "String", "Boolean" ]
+					[ "string pathToFile" ]
+					, [ "string pathToFile", "string pathToFile", "..." ]
+					, [ "string pathToFile", "boolean allowCache" ]
 				]
 			, "Tags" : [ "utility", "synchronous", "loading" ]
 			, "Source" : [ "page.base.js" ]

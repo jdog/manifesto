@@ -38,14 +38,14 @@ PAGE.add("Functions.createLegend", function(dom, dog) {
 
 					section.className = "Section"
 
-					title.innerHTML = "┄ " + index
+					title.innerHTML = index
 					section.appendChild(title)
 
 					for (var y in item)
 					(function(index, method, arr) {
 
 						var elem = document.createElement("a")
-						elem.innerHTML = "┄┄ " + method.Name
+						elem.innerHTML = method.Name
 						elem.href = "#" + method.Name
 
 						method.e_legendItem = elem

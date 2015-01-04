@@ -25,6 +25,7 @@ PAGE.addWait(
 
 	, function(ref) {
 
+		var f = new Function()
 		var dog = {
 			data : {}
 			, methods : []
@@ -45,14 +46,6 @@ PAGE.addWait(
 				dog.methods.push(
 					ref.APIMethod(e_root, methods[x])
 				)
-			}
-
-			if (location.hash) {
-				var methodName = location.hash.substr(1, location.hash.length - 1)
-				var currentLink = e_root.querySelector("a[name='" + methodName + "']")
-				if (currentLink) {
-					currentLink.click()
-				}
 			}
 
 		}
@@ -85,22 +78,46 @@ PAGE.addWait(
 			})
 		}
 
-		function legend() {
+		function legend(callback) {
 			PAGE.wait(
 				"Functions.createLegend"
 				, "Constructors.APIIndex"
 				, ref
 				, function() {
-					ref.createLegend(ref.dom, dog)
 
+					ref.createLegend(ref.dom, dog)
 					dog.apiIndex = ref.APIIndex(dog.e_legend, dog.methods, dog.e_root)
+
+					;(callback || f)()
 
 				})
 		}
 
+		// ensures that the element exists before clicking
+		function clickCurrent(hash) {
+			var e_currentLink = dog.e_legend.querySelector("a[href='" + hash + "']")
+			, e_currentMethod = document.getElementById(hash.substr(1))
+
+			if (e_currentLink && e_currentMethod)
+				e_currentLink.dispatchEvent(new Event("click"))
+			else
+				setTimeout(function() {
+					clickCurrent(hash)
+				}, 500)
+		}
+
 		function buildAllSections(arr) {
 			dog.batch = new ref.BatchCallback(arr.length, function() {
-				legend()
+
+				legend(function() {
+
+					if (location.hash)
+						clickCurrent(location.hash)
+					else
+						dog.e_legend.querySelector("a").dispatchEvent(new Event("fakeClick"))
+
+				})
+
 			})
 
 			// built this way to improve perceived speed

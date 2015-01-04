@@ -71,10 +71,20 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		html += "Source: "
 		html += data.Source ? data.Source.join(", ") : ""
 		html += "</div>"
-		html += "<div class='Usage'>"
-		html += "<div class='Label'>Usage:</div>"
-		html += buildUsage(data.Usage)
-		html += "</div>"
+
+		if (data.Description) {
+			html += "<div class='Description'>"
+			html += "<div class='Label'>Description:</div>"
+			html += data.Description
+			html += "</div>"
+		}
+
+		if (data.Usage) {
+			html += "<div class='Usage'>"
+			html += "<div class='Label'>Usage:</div>"
+			html += buildUsage(data.Usage)
+			html += "</div>"
+		}
 
 		if (data.Definitions) {
 			html += "<div class='Label'>Definitions:</div>"
@@ -87,13 +97,6 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 			html += "<div class='Returns'>"
 			html += "<div class='Label'>Returns:</div>"
 			html += data.Returns
-			html += "</div>"
-		}
-
-		if (data.Description) {
-			html += "<div class='Description'>"
-			html += "<div class='Label'>Description:</div>"
-			html += data.Description
 			html += "</div>"
 		}
 

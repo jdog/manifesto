@@ -46,9 +46,9 @@ h3 { font-size:150%; }
 .AlwaysOpen h1 { padding-left:25px; }
 
 pre { white-space: pre-wrap; font-family: 'monoFont', monospace; color: #fff; background-color: #383838; padding:10px; line-height:120%; }
-body { font-family: 'copy', sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; background: rgb(255, 255, 245); font-size: 17px; line-height: 170%;}
-html { background:transparent url(ricepaper_v3.png); }
-body { background:transparent url(vert-line.png); }
+body { font-family: 'copy', sans-serif, verdana; color: rgba(0,0,0,.8); padding:10px; /* background: rgb(255, 255, 245); */ font-size: 17px; line-height: 170%;}
+html { background-color: rgba(245, 245, 245, 1); }
+body { background-image:url(vert-line.png); }
 * { font-size: 1em; }
 i.c { font-weight:bold; }
 i.c, .Constant { color: #39B24A; }
@@ -169,5 +169,6 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	.AlwaysOpen #sidePanel.Open + .wrapper { padding-right: 300px; max-width:initial; }
 	.AlwaysOpen #sidePanel.Open + .wrapper h1 { }
 }
+
 
 
