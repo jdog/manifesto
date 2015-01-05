@@ -4,7 +4,8 @@
 		{
 			"Name" : "add"
 			, "Usage" : [
-					[ "Path", "Thing" ]
+					[ "string Path", "expression Thing" ]
+					, [ "string Path", "expression Thing", "optional string TestFile+" ]
 				]
 			, "Tags" : [ "spawn", "test", "synchronous" ]
 			, "Source" : [ "page.loader.js" ]
@@ -22,7 +23,8 @@
 			, "Description" : "This is the foundation of adding new items into the global name space. It's mean't to be extremely fast and flexible to add. If you have existing code for example, you can always add it after the fact as many of the following examples will demonstrate."
 			, "Definitions" : {
 				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
-				, "Thing" : "Any variable or literal"
+				, "Thing" : "Any expression, ie code that resolves to a value"
+				, "TestFile" : "This is totally optional and only used if page.test.js has been loaded"
 			}
 			, "Returns" : "Thing"
 		}

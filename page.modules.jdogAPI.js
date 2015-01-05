@@ -128,9 +128,11 @@ PAGE.addWait(
 		function init() {
 
 			buildAllSections([
-				"api_loader_add.json"
+				"api_loader_info.json"
+				, "api_loader_add.json"
 				, "api_loader_wait.json"
 				, "api_loader_other.json"
+				, "api_base_info.json"
 				, "api_base.json"
 				, "api_extend_events.json"
 				, "api_extend_batchCallback.json"

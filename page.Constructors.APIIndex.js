@@ -48,7 +48,10 @@ PAGE.add("Constructors.APIIndex", function(e_legend, methods, e_root) {
 			var offset = window.scrollY
 			if (dog.lastOffset === offset) return
 			dog.lastOffset = offset
-			dog.currentMethod = find(offset)
+			
+			var found = find(offset)
+			if (dog.currentMethod === found) return
+			dog.currentMethod = found
 			dog.currentMethod.data.e_legendItem.dispatchEvent(new Event('fakeClick'));
 		}, 200)
 

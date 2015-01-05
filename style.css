@@ -105,7 +105,8 @@ dl dd { margin:0 0 0 10px; padding:0; }
 #API .Title .Tags { font-size:14px; font-weight:normal; float:right; line-height:30px; }
 #API .Guts { padding:0 20px 20px; }
 #API .Source { float:right; }
-#API .Title .link { margin-left: 10px; color: rgba(76, 174, 199, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; font-weight: normal; }
+#API .Title .link { margin-right: 10px; color: rgba(76, 174, 199, 0.68); cursor: pointer; font-size: 20px; text-decoration:none; font-weight: normal; }
+#API .Title .linkBack { margin-right:0; float:right; vertical-align: baseline; line-height: 1.5em; font-size: 1.1em; font-weight: bold; margin-left: 22px;}
 #API .Returns { font-weight:bold; }
 #API .Label { font-weight:bold; margin:1em 0 .4em; color: rgb(22, 180, 180); }
 #API .Returns .Label { font-weight: bold; }
@@ -169,6 +170,7 @@ dl dd { margin:0 0 0 10px; padding:0; }
 	.AlwaysOpen #sidePanel.Open + .wrapper { padding-right: 300px; max-width:initial; }
 	.AlwaysOpen #sidePanel.Open + .wrapper h1 { }
 }
+
 
 
 

@@ -5,15 +5,15 @@
 		{
 			"Name" : "addWait"
 			, "Usage" : [
-					[ "Path", "WaitList", "Callback" ]
+					[ "string Path", "array WaitList", "function Callback" ]
 				]
 			, "Tags" : [ "wait", "module pattern", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
 			, "Parent" : [ "Base" ]
 			, "Examples" : [
-				"PAGE.addWait( \n  'Modules.homePage' // path \n  , [                // required libraries\n      'ajax'\n      , 'ready'\n      , 'Constructors.APIMethods'\n  ]\n  , function(ref) {  // callback\n \n   var exports = { \n     apiMethods : undefined // see below\n   }\n\n   exports.loadPage = function() {\n     ref.ajax(\"/pathToSomething\", {}, function(data) {\n       // ... lots of your code here\n       exports.apiMethods = ref.APIMethods(data)\n     })\n   }\n \n   return exports \n \n  })"
+				"PAGE.addWait( \n  'Modules.homePage' // path of thing being added \n  , [\n      'ajax'\n      , 'ready'\n      , 'Constructors.APIMethods'\n  ]\n  , function(ref) {\n \n   var exports = { \n     apiMethods : undefined // see below\n   }\n\n   exports.loadPage = function() {\n     ref.ajax(\"/pathToSomething\", {}, function(data) {\n       // ... lots of your code here\n       exports.apiMethods = ref.APIMethods(data)\n     })\n   }\n \n   return exports \n \n  })"
 			]
-			, "Description" : "Combines the functionality of add and wait into one function. This is a useful function for creating modules. For those familiar with requirejs this has an almost identical format, with the exception that the callback returns a single object instead of a list of arguments. This format is superior in many ways, as it is nolonger necessary to duplicate the names, or keep track of the order of arguments."
+			, "Description" : "Combines the functionality of add and wait into one function. This is useful for creating modules. For those familiar with requirejs this has an almost identical format, with the exception that the callback returns a single object instead of a list of arguments. This format is superior in many ways, as it is nolonger necessary to duplicate the names, or keep track of the order of arguments."
 			, "Definitions" : {
 				"Path" : "String - Path of the library item required, example 'Constructors.YourConstructor'"
 				, "WaitList" : "Array - list of other libraries required before callback is called"
@@ -25,7 +25,7 @@
 		, {
 			"Name" : "addWait$"
 			, "Usage" : [
-					[ "Path", "WaitList", "Callback" ]
+					[ "string Path", "array WaitList", "function Callback" ]
 				]
 			, "Tags" : [ "wait", "module pattern", "jQuery", "asynchronous" ]
 			, "Source" : [ "page.loader.js" ]
@@ -34,7 +34,7 @@
 				"PAGE.addWait$(\n 'Modules.jdogAPI'\n , [\n  'ajax'\n  , 'ready'\n  , 'Constructors.APIMethod'\n ],\n function(ref){ ... }))"
 				, "PAGE.addWait$(\n \"Modules.home\"\n , [\n  \"Constructors.Validation\"\n  , \"Modules.tracking\"\n ]\n , function(ref) {\n\n  var dog = {\n   $loginForm : $(\"#LoginForm\")\n   , $submit : $(\"#LoginForm button.Submit\")\n  }\n\n  function events() {\n\n   dog.validation = ref.Validation(\n    $(\"#LoginForm\")\n    , function success(data) {\n     ref.tracking.track(\n      \"Submit Success\"\n      , data\n      , function() { window.location = \"/dashboard\" })\n    }\n    , function fail() {\n     ref.tracking.track(\"Submit Failed\") \n    })\n\n   dog.$loginForm.submit(function() {\n    ref.tracking.track(\"Submit\") \n   })\n\n  }\n\n  events()\n\n  return dog\n\n })\n"
 			]
-			, "Description" : "Combines the functionality of add and wait, with jQuery's document.wait into one function. This is a useful function for creating modules with jQuery support."
+			, "Description" : "Combines the functionality of addWait with jQuery's document.ready. This is a useful function for creating modules with jQuery support."
 			, "Definitions" : {
 				"Path" : "String - Path of the library item required, example 'Constructors.YourConstructor'"
 				, "WaitList" : "Array - list of other libraries required before callback is called"
@@ -75,9 +75,12 @@
 			, "Source" : [ "page.loader.js" ]
 			, "Parent" : [ "Base" ]
 			, "Examples" : [
-				"PAGE.add$('Modules.login', (function(){ ... }()))"
+				"PAGE.add$('Modules.login', ( function(){\n\n  var dog = {\n    $root : $(\"#API\")\n    , $links : $(\"#API .sideBar a\")\n  }\n  , ref = dog.ref = { }\n\n  function init() {\n    // do something usefull with these\n    ref.LocalStorage\n    ref.dataService\n  }\n\n  PAGE.wait(\n    \"Constructors.LocalStorage\"\n    , \"Modules.dataService\"\n    , ref\n    , init)\n\n  return dog\n\n}()))"
 			]
-			, "Description" : "Combines the functionality of 'add' with jQuery ready. This is a very useful feature for jQuery users as it signals it's safe to call the $ (jQuery) variable. However, notice that unlike PAGE.add, add$ returns undefined."
+			, "Description" : [
+				"Combines the functionality of 'add' with jQuery ready. This is a very useful feature for jQuery users as it signals it's safe to call the $ (jQuery) variable. However, notice that unlike PAGE.add, add$ returns undefined."
+				, "add$ departs from the AMD style of first waiting for required items before running the callback. It does instead the lazy dog style of creating itself and then modifying itself once external libraries are ready."
+			]
 			, "Definitions" : {
 				"Path" : "Path of the item added, example 'Constructors.YourConstructor'"
 				, "Thing" : "Any variable or literal"

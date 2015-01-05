@@ -59,11 +59,12 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 			, data = dog.data 
 
 		html += "<div class='Title'>"
+		html += "<a href='#' title='To Top' class='link linkBack'>⌅</a>"
 		html += "<span class='Tags'>"
 		html += data.Tags ? data.Tags.length ? data.Tags.join(", ") : "" : ""
 		html += "</span>"
+		html += "<a name='" + data.Name + "' href='#" + data.Name + "' class='link' title='Link to Here'>§</a>"
 		html += data.Name
-		html += "<a name='" + data.Name + "' href='#" + data.Name + "' class='link'>§</a>"
 		html += "</div>"
 
 		html += "<div class='Guts'>"
@@ -72,17 +73,31 @@ PAGE.add("Constructors.APIMethod", function(e_parent, data, options) {
 		html += data.Source ? data.Source.join(", ") : ""
 		html += "</div>"
 
-		if (data.Description) {
-			html += "<div class='Description'>"
-			html += "<div class='Label'>Description:</div>"
-			html += data.Description
-			html += "</div>"
-		}
-
 		if (data.Usage) {
 			html += "<div class='Usage'>"
 			html += "<div class='Label'>Usage:</div>"
 			html += buildUsage(data.Usage)
+			html += "</div>"
+		}
+
+		if (data.Description) {
+			html += "<div class='Description'>"
+			html += "<div class='Label'>Description:</div>"
+
+			if (PAGE.getType(data.Description) === "Arr") {
+				;(function(desc) {
+
+					for (var x in desc) {
+						html += "<p>"
+						html += desc[x]
+						html += "</p>"
+					}
+
+				}(data.Description))
+			} else {
+				html += "<p>" + data.Description + "</p>"
+			}
+
 			html += "</div>"
 		}
 
